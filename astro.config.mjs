@@ -7,5 +7,5 @@ export default defineConfig({
   integrations: [tailwind(), react()],
   output: "static",
   site: "https://variantcode.co.jp",
-  base: "/corp",
+  base: "/",
 });
