@@ -5,6 +5,11 @@ import type { CompanyData } from '@/lib/types';
 import data from '@/lib/company-data.json';
 
 const companyData = data as CompanyData;
+
+const achievementImages = [
+  '/vc/images/top/result_webapp.jpg',
+  '/vc/images/top/result_elk.jpg',
+];
 ---
 
 <Layout title="株式会社バリアントコード">
@@ -14,15 +19,25 @@ const companyData = data as CompanyData;
     <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-20 py-6 md:py-xl space-y-8 md:space-y-xl">
 
       {/* Hero Section */}
-      <section class="text-center py-xl space-y-md">
-        <h2 class="text-4xl sm:text-5xl font-bold text-text-primary">
-          <span class="text-primary">プログラミング</span><span>を楽しむ</span>
+      <section class="text-center py-xl space-y-lg">
+        <h2 class="text-3xl sm:text-4xl font-bold text-text-primary leading-snug">
+          Web・アプリ・基幹システムの<br class="sm:hidden" />開発パートナー
         </h2>
-        <p class="text-body sm:text-lg text-text-secondary">{companyData.subtitle}</p>
-        <div class="flex justify-center gap-md pt-md">
-          <a href={`mailto:${companyData.contact.email}`} class="inline-flex items-center gap-xs px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-600 transition-colors text-body font-medium">
-            Mail
+        <p class="text-body sm:text-lg text-text-secondary max-w-2xl mx-auto">
+          多言語・フルスタック対応のソフトウェア開発会社です。<br />
+          技術スタックや経験案件の詳細は職務経歴書をご覧ください。
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-md pt-sm">
+          <a href="https://ogata-ryosuke.github.io/cs/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-xs px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-600 transition-colors text-body font-medium">
+            職務経歴書を見る
           </a>
+          <button
+            id="copy-email-btn"
+            data-email={companyData.contact.email}
+            class="inline-flex items-center justify-center gap-xs px-6 py-3 border border-border-light text-text-primary rounded-lg hover:bg-bg-section transition-colors text-body font-medium cursor-pointer"
+          >
+            案件のご相談・お問い合わせ
+          </button>
         </div>
       </section>
 
@@ -39,7 +54,11 @@ const companyData = data as CompanyData;
                     {item.label}
                   </th>
                   <td class="py-3 text-body text-text-secondary whitespace-pre-line">
-                    {item.value}
+                    {item.isLink ? (
+                      <a href={item.value} target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">{item.value}</a>
+                    ) : (
+                      item.value
+                    )}
                   </td>
                 </tr>
               ))}
@@ -53,9 +72,14 @@ const companyData = data as CompanyData;
         <h2 class="text-sectionHeading text-text-primary font-bold">代表メッセージ</h2>
         <div class="h-px bg-border-light"></div>
         <div class="bg-bg-surface border border-border-light rounded-card p-lg">
-          <p class="text-body text-text-primary leading-loose whitespace-pre-line">
-            {companyData.message}
-          </p>
+          <ul class="space-y-sm">
+            {companyData.message.map(item => (
+              <li class="flex gap-sm items-start">
+                <span class="text-primary mt-0.5">-</span>
+                <p class="text-body text-text-primary leading-relaxed">{item}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -64,68 +88,26 @@ const companyData = data as CompanyData;
         <h2 class="text-sectionHeading text-text-primary font-bold">開発実績</h2>
         <div class="h-px bg-border-light"></div>
 
-        {/* サービス領域 */}
-        <div class="space-y-lg">
-          <h3 class="text-subheading text-text-primary font-semibold text-center">最適なソリューションを提供</h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
-            {companyData.services.map(service => (
-              <div class="bg-bg-surface border border-border-light rounded-card p-lg space-y-sm text-center">
-                <h4 class="text-subheading text-text-primary font-semibold">{service.title}</h4>
-                <p class="text-body text-text-secondary">{service.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* 過去の開発実績 */}
-        <div class="space-y-md pt-lg">
-          {companyData.achievements.map(achievement => (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+          {companyData.achievements.map((achievement, i) => (
             <div class="bg-bg-surface border border-border-light rounded-card p-lg space-y-sm">
               <h3 class="text-subheading text-text-secondary font-medium">{achievement.title}</h3>
               <h4 class="text-subheading text-text-primary font-semibold">{achievement.subtitle}</h4>
               <p class="text-body text-text-secondary">{achievement.description}</p>
+              {achievementImages[i] && (
+                <img src={achievementImages[i]} alt={achievement.subtitle} class="w-full rounded mt-sm" />
+              )}
             </div>
           ))}
         </div>
 
-        {/* 開発言語等 */}
-        <div class="space-y-md pt-lg">
-          <h3 class="text-subheading text-text-primary font-semibold text-center">開発言語等</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
-            {companyData.techStack.map(category => (
-              <div class="bg-bg-surface border border-border-light rounded-card p-lg space-y-sm">
-                <h4 class="text-body text-text-primary font-semibold">{category.name}</h4>
-                <div class="flex flex-wrap gap-xs">
-                  {category.items.map(item => (
-                    <span class="inline-flex items-center px-2 py-0.5 rounded text-small bg-bg-section text-text-secondary border border-border-light">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* 採用 Section */}
       <section id="recruit" class="space-y-sm scroll-mt-[72px]">
         <h2 class="text-sectionHeading text-text-primary font-bold">採用</h2>
         <div class="h-px bg-border-light"></div>
-
-        {/* 募集要項 */}
-        <div class="bg-bg-surface border border-border-light rounded-card p-lg space-y-md">
-          <h3 class="text-subheading text-text-primary font-semibold">募集要項</h3>
-          <p class="text-body text-text-secondary">{companyData.recruit.description}</p>
-          <a
-            href={companyData.recruit.indeedUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-xs px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-600 transition-colors text-body font-medium"
-          >
-            求人画面
-          </a>
-        </div>
 
         {/* フリーランスエンジニア支援 */}
         <div class="bg-bg-surface border border-border-light rounded-card p-lg space-y-sm">
@@ -138,6 +120,31 @@ const companyData = data as CompanyData;
 
     </div>
   </main>
+
+  {/* Snackbar */}
+  <div id="snackbar" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-text-primary text-white text-body px-6 py-3 rounded-lg shadow-lg opacity-0 translate-y-4 pointer-events-none transition-all duration-300 z-50">
+    メールアドレスをコピーしました
+  </div>
+
+  <script>
+    const btn = document.getElementById('copy-email-btn');
+    const snackbar = document.getElementById('snackbar');
+    let timer: ReturnType<typeof setTimeout>;
+
+    btn?.addEventListener('click', async () => {
+      const email = btn.getAttribute('data-email') || '';
+      await navigator.clipboard.writeText(email);
+
+      snackbar?.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+      snackbar?.classList.add('opacity-100', 'translate-y-0');
+
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        snackbar?.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+        snackbar?.classList.remove('opacity-100', 'translate-y-0');
+      }, 2500);
+    });
+  </script>
 
   {/* Footer */}
   <footer class="bg-text-primary text-white mt-xl">

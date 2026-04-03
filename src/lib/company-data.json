@@ -8,15 +8,36 @@
     "phone": "080-5683-8638"
   },
   "overview": [
-    { "label": "社名", "value": "株式会社バリアントコード" },
-    { "label": "設立", "value": "2020年2月" },
-    { "label": "所在地", "value": "【会社所在地】\n〒206-0025 東京都多摩市永山1-12-3 フォレッジ多摩永山204\n【作業場所】\n基本的にリモートワーク" },
-    { "label": "資本金", "value": "350万円" },
-    { "label": "代表者", "value": "小方 亮佑" },
-    { "label": "電話番号", "value": "080-5683-8638（代表）" },
-    { "label": "メールアドレス", "value": "ogata.ryosuke@variantcode.co.jp" }
+    {
+      "label": "社名",
+      "value": "株式会社バリアントコード"
+    },
+    {
+      "label": "設立",
+      "value": "2020年2月"
+    },
+    {
+      "label": "所在地",
+      "value": "〒206-0025 東京都多摩市永山1-12-3 フォレッジ多摩永山204"
+    },
+    {
+      "label": "代表者",
+      "value": "小方 亮佑"
+    },
+    {
+      "label": "電話番号",
+      "value": "080-5683-8638（代表）"
+    },
+    {
+      "label": "メールアドレス",
+      "value": "ogata.ryosuke@variantcode.co.jp"
+    }
   ],
-  "message": "「プログラマーが活躍できる環境を作りたい」という想いから株式会社バリアントコードを設立しました。\n\nコードには影響力がある。もしかしたら設計や仕様書よりも。\nその1行が企業が何ヶ月も抱えていた問題を解決することもある。その1行を思うと夜も眠れないことがある。\n\nよいコードを書くためにはどうすればよいでしょう？\nまずは、顧客とのコミュニケーションを密にとり、顧客自身ですら気付いていない真の要求を正確に聞き出す。そして、掘り出したものは設計として定量化する。それら仕様を把握したのち、プログラミング技術を駆使して形にする。\n\nこうして生まれた1行には意味があり理由があり誇りがあるはずです。\n⌘+vできればプログラマーというわけではないのです。\n\nプログラマーには、みな自分の技術に自信と誇りを持ち活躍してほしい。\nわたしからは一人一人が成長できる環境を提供できればと考えています。",
+  "message": [
+    "顧客とのコミュニケーションを密にとり、真の要求を正確に聞き出す",
+    "掘り出した要求を設計として定量化する",
+    "プログラミング技術を駆使して形にする"
+  ],
   "services": [
     {
       "title": "豊富な開発言語",
@@ -41,24 +62,179 @@
       "title": "過去の開発実績2",
       "subtitle": "ELKオンプレ構築案件",
       "description": "既存セキュリティソフトサーバ群のログ（1日300GB）集約基盤構築。基本設計〜ELK Stackのインストール、設定、実装を担当。"
+    },
+    {
+      "title": "過去の開発実績3",
+      "subtitle": "AI学習支援モバイルアプリ",
+      "description": "数学などの問題文画像をアップロードし、解き方や解決手順を提示するアプリ。解き方の方針が複数ある場合に選択・閲覧できる機能を実装。Flutter / Python / FastAPI / OpenAI / GCP。"
+    },
+    {
+      "title": "過去の開発実績4",
+      "subtitle": "AI文書レビュープラットフォーム",
+      "description": "法務・契約書などのドキュメントレビューを効率化するエンタープライズ向けプラットフォーム。PDF/Word/PowerPointをアップロードし、LLMによるAIレビューを実施。プロンプト改善サイクルの構築・promptfooによる品質計測基盤を整備。Next.js / TypeScript / OpenAI / GCP / Terraform。"
     }
   ],
   "techStack": [
-    { "name": "Python", "items": ["Pyramid", "Django", "Bottle", "SQLAlchemy"] },
-    { "name": "Java", "items": ["Spring Framework", "Spring Boot", "Guava", "Swing", "MyBatis", "Hibernate", "JPA", "JUnit", "Groovy"] },
-    { "name": "PHP", "items": ["Laravel", "Symfony", "FuelPHP", "CakePHP", "Flask", "Smarty", "slim", "PHPUnit"] },
-    { "name": "Ruby", "items": ["Ruby on Rails"] },
-    { "name": "Go", "items": ["gin", "GORM"] },
-    { "name": "HTML/CSS", "items": ["HTML5", "Bootstrap", "Sass", "less", "stylus", "SPA(Single Page Application)"] },
-    { "name": "JavaScript", "items": ["JQuery", "AngularJS", "Backbone.js", "vue.js", "React.js", "CoffeeScript"] },
-    { "name": "Android", "items": ["Kotlin", "RxJava", "okhttp", "Retrofit2", "Gson", "ButterKnife", "otto", "android-annotation", "OpenGL"] },
-    { "name": "iOS", "items": ["Objective-C", "Swift", "RxSwift"] },
-    { "name": "DB", "items": ["MySQL", "PostgreSQL", "Oracle", "Salesforce", "SQLite", "Access", "Redis", "memcached"] },
-    { "name": "Server", "items": ["Redhat", "CentOS", "Apache", "Tomcat", "nginx"] },
-    { "name": "AWS", "items": ["EC2", "RDS", "S3", "Lambda", "Batch", "Elastic Load Balancing", "Elastic Beanstalk"] },
-    { "name": "Elastic(ELK)", "items": ["ElasticSearch", "Logstash", "Kibana", "Filebeat", "X-Pack", "Monitoring", "Machine Learning"] },
-    { "name": "DevOps", "items": ["Github", "Jenkins", "Docker", "Ansible", "Selenium", "DBUnit"] },
-    { "name": "Others", "items": ["Visual Basic 6", "Excel VBA", ".NET Framework", "hubot"] }
+    {
+      "name": "Python",
+      "items": [
+        "Pyramid",
+        "Django",
+        "Bottle",
+        "SQLAlchemy"
+      ]
+    },
+    {
+      "name": "Java",
+      "items": [
+        "Spring Framework",
+        "Spring Boot",
+        "Guava",
+        "Swing",
+        "MyBatis",
+        "Hibernate",
+        "JPA",
+        "JUnit",
+        "Groovy"
+      ]
+    },
+    {
+      "name": "PHP",
+      "items": [
+        "Laravel",
+        "Symfony",
+        "FuelPHP",
+        "CakePHP",
+        "Flask",
+        "Smarty",
+        "slim",
+        "PHPUnit"
+      ]
+    },
+    {
+      "name": "Ruby",
+      "items": [
+        "Ruby on Rails"
+      ]
+    },
+    {
+      "name": "Go",
+      "items": [
+        "gin",
+        "GORM"
+      ]
+    },
+    {
+      "name": "HTML/CSS",
+      "items": [
+        "HTML5",
+        "Bootstrap",
+        "Sass",
+        "less",
+        "stylus",
+        "SPA(Single Page Application)"
+      ]
+    },
+    {
+      "name": "JavaScript",
+      "items": [
+        "JQuery",
+        "AngularJS",
+        "Backbone.js",
+        "vue.js",
+        "React.js",
+        "CoffeeScript"
+      ]
+    },
+    {
+      "name": "Android",
+      "items": [
+        "Kotlin",
+        "RxJava",
+        "okhttp",
+        "Retrofit2",
+        "Gson",
+        "ButterKnife",
+        "otto",
+        "android-annotation",
+        "OpenGL"
+      ]
+    },
+    {
+      "name": "iOS",
+      "items": [
+        "Objective-C",
+        "Swift",
+        "RxSwift"
+      ]
+    },
+    {
+      "name": "DB",
+      "items": [
+        "MySQL",
+        "PostgreSQL",
+        "Oracle",
+        "Salesforce",
+        "SQLite",
+        "Access",
+        "Redis",
+        "memcached"
+      ]
+    },
+    {
+      "name": "Server",
+      "items": [
+        "Redhat",
+        "CentOS",
+        "Apache",
+        "Tomcat",
+        "nginx"
+      ]
+    },
+    {
+      "name": "AWS",
+      "items": [
+        "EC2",
+        "RDS",
+        "S3",
+        "Lambda",
+        "Batch",
+        "Elastic Load Balancing",
+        "Elastic Beanstalk"
+      ]
+    },
+    {
+      "name": "Elastic(ELK)",
+      "items": [
+        "ElasticSearch",
+        "Logstash",
+        "Kibana",
+        "Filebeat",
+        "X-Pack",
+        "Monitoring",
+        "Machine Learning"
+      ]
+    },
+    {
+      "name": "DevOps",
+      "items": [
+        "Github",
+        "Jenkins",
+        "Docker",
+        "Ansible",
+        "Selenium",
+        "DBUnit"
+      ]
+    },
+    {
+      "name": "Others",
+      "items": [
+        "Visual Basic 6",
+        "Excel VBA",
+        ".NET Framework",
+        "hubot"
+      ]
+    }
   ],
   "recruit": {
     "description": "随時募集中です。興味のある方は、こちらのリンクからご覧ください。",

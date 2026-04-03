@@ -8,7 +8,7 @@ export interface CompanyData {
     phone: string;
   };
   overview: OverviewItem[];
-  message: string;
+  message: string[];
   services: Service[];
   achievements: Achievement[];
   techStack: TechCategory[];
@@ -25,6 +25,7 @@ export interface CompanyData {
 export interface OverviewItem {
   label: string;
   value: string;
+  isLink?: boolean;
 }
 
 export interface Service {
