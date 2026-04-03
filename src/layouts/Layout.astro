@@ -1,0 +1,39 @@
+---
+import '../styles/globals.css';
+
+interface Props {
+  title?: string;
+}
+
+const { title = '株式会社バリアントコード' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Webシステム・スマホアプリ・基幹システム構築などのソフトウェア開発事業を拡大中です。エンジニアにとって働きやすい環境を作る。" />
+    <meta name="keywords" content="バリアントコード,Web,アプリ,基幹システム,設計,運用" />
+    <meta name="author" content="株式会社バリアントコード" />
+    <meta property="og:site_name" content="株式会社バリアントコード" />
+    <meta property="og:title" content="株式会社バリアントコード" />
+    <meta property="og:description" content="Webシステム・スマホアプリ・基幹システム構築などのソフトウェア開発事業を拡大中です。" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/x-icon" href="/vc/images/icon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/vc/images/icon/apple-icon-180x180.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-bg-page">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #1f2937;
+    background: #fafbfc;
+  }
+</style>

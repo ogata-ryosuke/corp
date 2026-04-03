@@ -1,0 +1,30 @@
+---
+interface Props {
+  companyName: string;
+}
+
+const { companyName } = Astro.props;
+
+const navItems = [
+  { label: '会社概要', href: '#overview' },
+  { label: '代表メッセージ', href: '#message' },
+  { label: '開発実績', href: '#performance' },
+  { label: '採用', href: '#recruit' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 h-header bg-bg-surface border-b border-border-light">
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-20 h-full flex items-center justify-between">
+    <div class="flex items-center gap-md">
+      <h1 class="text-header text-text-primary font-bold">{companyName}</h1>
+    </div>
+
+    <nav class="hidden sm:flex items-center gap-lg">
+      {navItems.map(item => (
+        <a href={item.href} class="text-body text-text-secondary hover:text-text-primary transition-colors">
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
