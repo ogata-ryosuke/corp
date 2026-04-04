@@ -31,13 +31,9 @@ const achievementImages = [
           <a href="https://cs.variantcode.co.jp/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-xs px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-600 transition-colors text-body font-medium">
             職務経歴書を見る
           </a>
-          <button
-            id="copy-email-btn"
-            data-email={companyData.contact.email}
-            class="inline-flex items-center justify-center gap-xs px-6 py-3 border border-border-light text-text-primary rounded-lg hover:bg-bg-section transition-colors text-body font-medium cursor-pointer"
-          >
+          <a href="https://forms.gle/kTrm7gXFGnHjedww7" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-xs px-6 py-3 border border-border-light text-text-primary rounded-lg hover:bg-bg-section transition-colors text-body font-medium">
             案件のご相談・お問い合わせ
-          </button>
+          </a>
         </div>
       </section>
 
@@ -120,31 +116,6 @@ const achievementImages = [
 
     </div>
   </main>
-
-  {/* Snackbar */}
-  <div id="snackbar" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-text-primary text-white text-body px-6 py-3 rounded-lg shadow-lg opacity-0 translate-y-4 pointer-events-none transition-all duration-300 z-50">
-    メールアドレスをコピーしました
-  </div>
-
-  <script>
-    const btn = document.getElementById('copy-email-btn');
-    const snackbar = document.getElementById('snackbar');
-    let timer: ReturnType<typeof setTimeout>;
-
-    btn?.addEventListener('click', async () => {
-      const email = btn.getAttribute('data-email') || '';
-      await navigator.clipboard.writeText(email);
-
-      snackbar?.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
-      snackbar?.classList.add('opacity-100', 'translate-y-0');
-
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        snackbar?.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
-        snackbar?.classList.remove('opacity-100', 'translate-y-0');
-      }, 2500);
-    });
-  </script>
 
   {/* Footer */}
   <footer class="bg-text-primary text-white mt-xl">
