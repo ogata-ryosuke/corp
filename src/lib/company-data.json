@@ -62,16 +62,6 @@
       "title": "過去の開発実績2",
       "subtitle": "ELKオンプレ構築案件",
       "description": "既存セキュリティソフトサーバ群のログ（1日300GB）集約基盤構築。基本設計〜ELK Stackのインストール、設定、実装を担当。"
-    },
-    {
-      "title": "過去の開発実績3",
-      "subtitle": "AI学習支援モバイルアプリ",
-      "description": "数学などの問題文画像をアップロードし、解き方や解決手順を提示するアプリ。解き方の方針が複数ある場合に選択・閲覧できる機能を実装。Flutter / Python / FastAPI / OpenAI / GCP。"
-    },
-    {
-      "title": "過去の開発実績4",
-      "subtitle": "AI文書レビュープラットフォーム",
-      "description": "法務・契約書などのドキュメントレビューを効率化するエンタープライズ向けプラットフォーム。PDF/Word/PowerPointをアップロードし、LLMによるAIレビューを実施。プロンプト改善サイクルの構築・promptfooによる品質計測基盤を整備。Next.js / TypeScript / OpenAI / GCP / Terraform。"
     }
   ],
   "techStack": [
