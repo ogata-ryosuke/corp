@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://variantcode.co.jp/sitemap-index.xml

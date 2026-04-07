@@ -3,9 +3,29 @@ import '../styles/globals.css';
 
 interface Props {
   title?: string;
+  description?: string;
+  image?: string;
 }
 
-const { title = '株式会社バリアントコード' } = Astro.props;
+const {
+  title = '株式会社バリアントコード',
+  description = 'Webシステム・スマホアプリ・基幹システム構築などのソフトウェア開発事業を拡大中です。エンジニアにとって働きやすい環境を作る。',
+  image = '/images/top/logo.jpg',
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://variantcode.co.jp';
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://variantcode.co.jp').toString();
+const ogImage = new URL(image, Astro.site ?? 'https://variantcode.co.jp').toString();
+
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: '株式会社バリアントコード',
+  alternateName: 'VariantCode Inc.',
+  url: siteUrl,
+  logo: `${siteUrl}/images/top/logo_simple.png`,
+  description,
+};
 ---
 
 <!doctype html>
@@ -13,17 +33,40 @@ const { title = '株式会社バリアントコード' } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Webシステム・スマホアプリ・基幹システム構築などのソフトウェア開発事業を拡大中です。エンジニアにとって働きやすい環境を作る。" />
+    <meta name="description" content={description} />
     <meta name="keywords" content="バリアントコード,Web,アプリ,基幹システム,設計,運用" />
     <meta name="author" content="株式会社バリアントコード" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="canonical" href={canonical} />
+
     <meta property="og:site_name" content="株式会社バリアントコード" />
-    <meta property="og:title" content="株式会社バリアントコード" />
-    <meta property="og:description" content="Webシステム・スマホアプリ・基幹システム構築などのソフトウェア開発事業を拡大中です。" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="ja_JP" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
     <link rel="icon" type="image/x-icon" href="/images/icon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/images/icon/apple-icon-180x180.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />
+
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-XHLVD4VBSB"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XHLVD4VBSB');
+    </script>
   </head>
   <body class="bg-bg-page">
     <slot />
