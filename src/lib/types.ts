@@ -45,6 +45,7 @@ export interface FeaturedWork {
   slug: string;
   title: string;
   summary: string;
+  ctaContext: CtaContext;
   background: string[];
   scope: string[];
   tech: string[];

@@ -21,6 +21,9 @@ interface Props {
 
 const { work } = Astro.props;
 
+const primaryCta =
+  companyData.ctaVariants.find(variant => variant.context === work.ctaContext) ?? companyData.ctaVariants[0];
+
 const sections: Array<{ id: string; label: string; items: string[]; variant: 'paragraphs' | 'bullets' | 'tags' }> = [
   { id: 'background', label: '背景・課題', items: work.background, variant: 'paragraphs' },
   { id: 'scope', label: '担当範囲', items: work.scope, variant: 'bullets' },
@@ -90,13 +93,13 @@ const sections: Array<{ id: string; label: string; items: string[]; variant: 'pa
         </p>
         <div class="flex flex-wrap gap-sm pt-xs">
           <a
-            href="/contact/?context=ai"
+            href={`/contact/?context=${primaryCta.context}`}
             data-ga-event="cta_click"
-            data-ga-context="ai"
+            data-ga-context={primaryCta.context}
             data-ga-source={`work_${work.slug}`}
             class="inline-flex items-center gap-xs px-5 py-2.5 bg-text-primary text-white rounded-lg hover:bg-primary-700 transition-colors text-body font-medium"
           >
-            AI機能の導入を相談する →
+            {primaryCta.label} →
           </a>
           <a
             href="/contact/"
