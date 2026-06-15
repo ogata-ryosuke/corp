@@ -7,9 +7,8 @@ import data from '@/lib/company-data.json';
 
 const companyData = data as CompanyData;
 
-export async function getStaticPaths() {
-  const allData = (await import('@/lib/company-data.json')).default as CompanyData;
-  return allData.featuredWorks.map(work => ({
+export function getStaticPaths() {
+  return (data as CompanyData).featuredWorks.map(work => ({
     params: { slug: work.slug },
     props: { work },
   }));
@@ -30,8 +29,7 @@ const breadcrumbJsonLd = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'トップ', item: `${siteBase}/` },
-    { '@type': 'ListItem', position: 2, name: '実績', item: `${siteBase}/#works` },
-    { '@type': 'ListItem', position: 3, name: work.title, item: `${siteBase}/works/${work.slug}/` },
+    { '@type': 'ListItem', position: 2, name: work.title, item: `${siteBase}/works/${work.slug}/` },
   ],
 };
 
@@ -48,6 +46,7 @@ const sections: Array<{ id: string; label: string; items: string[]; variant: 'pa
 <Layout
   title={`${work.title} | 実績 | 株式会社バリアントコード`}
   description={work.summary}
+  ogType="article"
 >
   <script slot="head" is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
 

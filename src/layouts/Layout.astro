@@ -7,12 +7,16 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  ogType?: string;
+  noindex?: boolean;
 }
 
 const {
   title = '株式会社バリアントコード',
-  description = 'Webシステム・スマホアプリ・基幹システム構築などのソフトウェア開発事業を拡大中です。エンジニアにとって働きやすい環境を作る。',
+  description = '東京・八王子拠点／オンライン対応のソフトウェア開発会社。新規Web・モバイルアプリ開発、既存システムの改善・再設計、AI／LLM機能の開発と評価運用設計まで、要件整理から一貫して支援します。',
   image = '/images/top/logo.jpg',
+  ogType = 'website',
+  noindex = false,
 } = Astro.props;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://variantcode.co.jp';
@@ -30,14 +34,14 @@ const orgJsonLd = {
   url: siteUrl,
   logo: `${siteUrl}/images/top/logo_simple.png`,
   email: companyData.contact.email,
-  foundingDate: '2020-02',
+  foundingDate: '2020-02-01',
   description: orgDescription,
   address: {
     '@type': 'PostalAddress',
     postalCode: '192-0082',
     addressRegion: '東京都',
     addressLocality: '八王子市',
-    streetAddress: '東町1番14号 橋完ビル4階E号室',
+    streetAddress: '東町1番14号橋完ビル4階E号室',
     addressCountry: 'JP',
   },
   founder: {
@@ -53,20 +57,19 @@ const orgJsonLd = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="keywords" content="バリアントコード,Web,アプリ,基幹システム,設計,運用" />
     <meta name="author" content="株式会社バリアントコード" />
     <meta name="theme-color" content="#ffffff" />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
 
     <meta property="og:site_name" content="株式会社バリアントコード" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content="ja_JP" />
 
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />

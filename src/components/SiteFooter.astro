@@ -19,11 +19,11 @@ const footerLinks = [
   <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-20 py-xl">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
       <div class="space-y-xs md:col-span-2">
-        <h2 class="text-body font-semibold">{companyName}</h2>
+        <p class="text-body font-semibold">{companyName}</p>
         <p class="text-small text-white/60">Web開発・アプリ開発・基幹システム設計運用</p>
         <p class="text-small text-white/60 pt-sm">We are {companyNameEn}</p>
       </div>
-      <nav aria-label="Footer navigation" class="flex flex-col gap-xs">
+      <nav aria-label="フッターナビゲーション" class="flex flex-col gap-xs">
         {footerLinks.map(link => (
           <a href={link.href} class="text-body text-white/70 hover:text-white transition-colors">
             {link.label}
