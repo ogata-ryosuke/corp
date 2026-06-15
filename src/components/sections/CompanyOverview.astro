@@ -1,5 +1,6 @@
 ---
 import type { OverviewItem } from '@/lib/types';
+import SectionHeading from './SectionHeading.astro';
 
 interface Props {
   overview: OverviewItem[];
@@ -8,11 +9,8 @@ interface Props {
 const { overview } = Astro.props;
 ---
 
-<section id="overview" class="space-y-sm scroll-mt-[72px]">
-  <div class="space-y-xs">
-    <p class="text-small uppercase tracking-[0.2em] text-primary-600 font-semibold">Company</p>
-    <h2 class="text-sectionHeading md:text-2xl text-text-primary font-bold">会社概要</h2>
-  </div>
+<section id="overview" class="space-y-lg scroll-mt-[72px]">
+  <SectionHeading eyebrow="Company" heading="会社概要" />
   <div class="bg-bg-surface border border-border-light rounded-card p-lg">
     <table class="w-full">
       <tbody>

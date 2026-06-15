@@ -1,5 +1,6 @@
 ---
 import type { CtaVariant } from '@/lib/types';
+import SectionHeading from './SectionHeading.astro';
 
 interface Props {
   ctaVariants: CtaVariant[];
@@ -9,9 +10,8 @@ const { ctaVariants } = Astro.props;
 ---
 
 <section id="contact" class="space-y-lg scroll-mt-[72px]">
-  <div class="space-y-xs">
-    <p class="text-small uppercase tracking-[0.2em] text-primary-600 font-semibold">Contact</p>
-    <h2 class="text-sectionHeading md:text-2xl text-text-primary font-bold">ご相談はこちらから</h2>
+  <div class="space-y-sm">
+    <SectionHeading eyebrow="Contact" heading="ご相談はこちらから" />
     <p class="text-body text-text-secondary max-w-2xl">
       初回相談はオンライン30〜60分、無料です。要件が未整理の段階でも構いません。用途に近いものからお選びください。
     </p>
@@ -22,7 +22,7 @@ const { ctaVariants } = Astro.props;
         href={`/contact/?context=${cta.context}`}
         data-ga-event="cta_click"
         data-ga-context={cta.context}
-        class="group bg-text-primary text-white rounded-card p-lg flex flex-col gap-sm hover:bg-primary-700 transition-colors"
+        class="group bg-text-primary text-white rounded-card p-lg flex flex-col gap-sm hover:bg-primary-700 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300"
       >
         <h3 class="text-subheading font-semibold flex items-center justify-between">
           {cta.label}

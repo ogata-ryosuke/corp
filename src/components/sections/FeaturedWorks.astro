@@ -1,5 +1,6 @@
 ---
 import type { FeaturedWork } from '@/lib/types';
+import SectionHeading from './SectionHeading.astro';
 
 interface Props {
   works: FeaturedWork[];
@@ -11,10 +12,7 @@ const { works, careerSheetUrl } = Astro.props;
 
 <section id="works" class="space-y-lg scroll-mt-[72px]">
   <div class="flex items-end justify-between gap-md flex-wrap">
-    <div class="space-y-xs">
-      <p class="text-small uppercase tracking-[0.2em] text-primary-600 font-semibold">Featured Works</p>
-      <h2 class="text-sectionHeading md:text-2xl text-text-primary font-bold">代表実績</h2>
-    </div>
+    <SectionHeading eyebrow="Featured Works" heading="代表実績" />
     <a
       href={careerSheetUrl}
       target="_blank"
@@ -32,7 +30,7 @@ const { works, careerSheetUrl } = Astro.props;
         href={`/works/${work.slug}/`}
         data-ga-event="work_card_click"
         data-ga-slug={work.slug}
-        class="group bg-bg-surface border border-border-light rounded-card p-lg flex flex-col gap-sm hover:border-primary-500 hover:shadow-sm transition-all"
+        class="group bg-bg-surface border border-border-light rounded-card p-lg flex flex-col gap-sm hover:border-primary-500 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300"
       >
         <h3 class="text-subheading text-text-primary font-semibold group-hover:text-primary-700 transition-colors">
           {work.title}

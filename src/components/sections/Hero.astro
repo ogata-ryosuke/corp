@@ -7,12 +7,24 @@ interface Props {
 }
 
 const { heroMessaging, careerSheetUrl } = Astro.props;
+
+const capabilities = ['新規Web／モバイルアプリ開発', '既存システムの改善・再設計', 'AI／LLM機能の開発・評価運用'];
 ---
 
-<section class="relative py-2xl md:py-2xl">
-  <div class="absolute inset-0 bg-gradient-to-b from-primary-50/40 via-transparent to-transparent pointer-events-none"></div>
+<section class="relative py-2xl md:py-[6.5rem] overflow-hidden">
+  <div class="absolute inset-0 -z-10 pointer-events-none">
+    <div class="absolute inset-0 bg-gradient-to-b from-primary-50/50 via-transparent to-transparent"></div>
+    <div
+      class="absolute inset-0 opacity-40"
+      style="background-image:radial-gradient(#d4d4d8 1px, transparent 1px); background-size:22px 22px; -webkit-mask-image:linear-gradient(to bottom, black, transparent 72%); mask-image:linear-gradient(to bottom, black, transparent 72%);"
+    >
+    </div>
+  </div>
   <div class="relative max-w-4xl space-y-lg">
-    <p class="text-small uppercase tracking-[0.2em] text-primary-600 font-semibold">Variant Code — Development Partner</p>
+    <div class="flex items-center gap-sm">
+      <span class="h-px w-8 bg-primary-500" aria-hidden="true"></span>
+      <p class="text-small uppercase tracking-[0.2em] text-primary-600 font-semibold font-mono">Variant Code — Development Partner</p>
+    </div>
     <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary leading-[1.15] tracking-tight text-balance">
       {heroMessaging.headline}
     </h1>
@@ -38,5 +50,13 @@ const { heroMessaging, careerSheetUrl } = Astro.props;
         職務経歴書を見る
       </a>
     </div>
+    <ul class="flex flex-wrap gap-x-lg gap-y-xs pt-lg mt-sm border-t border-border-light/70">
+      {capabilities.map(capability => (
+        <li class="flex items-center gap-xs text-small text-text-secondary">
+          <span class="inline-block w-1 h-1 rounded-full bg-primary-500" aria-hidden="true"></span>
+          {capability}
+        </li>
+      ))}
+    </ul>
   </div>
 </section>
