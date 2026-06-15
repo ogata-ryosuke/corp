@@ -1,0 +1,153 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import type { CompanyData, FeaturedWork } from '@/lib/types';
+import data from '@/lib/company-data.json';
+
+const companyData = data as CompanyData;
+
+export async function getStaticPaths() {
+  const allData = (await import('@/lib/company-data.json')).default as CompanyData;
+  return allData.featuredWorks.map(work => ({
+    params: { slug: work.slug },
+    props: { work },
+  }));
+}
+
+interface Props {
+  work: FeaturedWork;
+}
+
+const { work } = Astro.props;
+
+const sections: Array<{ id: string; label: string; items: string[]; variant: 'paragraphs' | 'bullets' | 'tags' }> = [
+  { id: 'background', label: '背景・課題', items: work.background, variant: 'paragraphs' },
+  { id: 'scope', label: '担当範囲', items: work.scope, variant: 'bullets' },
+  { id: 'tech', label: '使用技術', items: work.tech, variant: 'tags' },
+  { id: 'approach', label: 'アプローチ', items: work.approach, variant: 'paragraphs' },
+  { id: 'outcome', label: '成果', items: work.outcome, variant: 'paragraphs' },
+  { id: 'idealFor', label: 'こういう依頼に向いています', items: work.idealFor, variant: 'bullets' },
+];
+---
+
+<Layout
+  title={`${work.title} | 実績 | 株式会社バリアントコード`}
+  description={work.summary}
+>
+  <Header companyName={companyData.companyName} />
+
+  <main class="pt-header">
+    <article class="max-w-3xl mx-auto px-4 sm:px-6 md:px-10 py-xl md:py-2xl space-y-xl">
+      <nav aria-label="Breadcrumb" class="text-small text-text-secondary">
+        <a href="/" class="hover:text-text-primary hover:underline">トップ</a>
+        <span class="mx-1" aria-hidden="true">/</span>
+        <a href="/#works" class="hover:text-text-primary hover:underline">実績</a>
+        <span class="mx-1" aria-hidden="true">/</span>
+        <span class="text-text-primary">{work.title}</span>
+      </nav>
+
+      <header class="space-y-sm border-b border-border-light pb-lg">
+        <p class="text-small uppercase tracking-[0.2em] text-primary-600 font-semibold">Case Study</p>
+        <h1 class="text-3xl sm:text-4xl font-bold text-text-primary leading-tight">{work.title}</h1>
+        <p class="text-body sm:text-lg text-text-secondary leading-relaxed">{work.summary}</p>
+      </header>
+
+      {sections.map(section => (
+        <section id={section.id} class="space-y-sm">
+          <h2 class="text-sectionHeading text-text-primary font-bold">{section.label}</h2>
+          {section.variant === 'paragraphs' && (
+            <div class="space-y-sm">
+              {section.items.map(text => (
+                <p class="text-body text-text-primary leading-relaxed">{text}</p>
+              ))}
+            </div>
+          )}
+          {section.variant === 'bullets' && (
+            <ul class="space-y-xs">
+              {section.items.map(text => (
+                <li class="flex gap-sm items-center">
+                  <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary-500 flex-shrink-0" aria-hidden="true"></span>
+                  <span class="text-body text-text-primary leading-relaxed">{text}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {section.variant === 'tags' && (
+            <div class="flex flex-wrap gap-1.5">
+              {section.items.map(tag => (
+                <span class="text-small text-text-secondary bg-bg-section border border-border-light px-2 py-1 rounded">{tag}</span>
+              ))}
+            </div>
+          )}
+        </section>
+      ))}
+
+      <section class="space-y-sm bg-bg-section border border-border-light rounded-card p-lg">
+        <h2 class="text-sectionHeading text-text-primary font-bold">類似の案件をご相談ください</h2>
+        <p class="text-body text-text-secondary leading-relaxed">
+          同様のアプローチが活かせる案件をご検討中の方は、用途に近いものからご相談いただけます。
+        </p>
+        <div class="flex flex-wrap gap-sm pt-xs">
+          <a
+            href="/contact/?context=ai"
+            data-ga-event="cta_click"
+            data-ga-context="ai"
+            data-ga-source={`work_${work.slug}`}
+            class="inline-flex items-center gap-xs px-5 py-2.5 bg-text-primary text-white rounded-lg hover:bg-primary-700 transition-colors text-body font-medium"
+          >
+            AI機能の導入を相談する →
+          </a>
+          <a
+            href="/contact/"
+            data-ga-event="cta_click"
+            data-ga-context="general"
+            data-ga-source={`work_${work.slug}`}
+            class="inline-flex items-center gap-xs px-5 py-2.5 border border-border-light text-text-primary rounded-lg hover:bg-bg-surface transition-colors text-body font-medium"
+          >
+            その他のご相談
+          </a>
+        </div>
+      </section>
+
+      <section class="space-y-sm">
+        <h2 class="text-sectionHeading text-text-primary font-bold">他の実績</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-sm">
+          {companyData.featuredWorks.filter(w => w.slug !== work.slug).map(other => (
+            <a
+              href={`/works/${other.slug}/`}
+              data-ga-event="work_card_click"
+              data-ga-slug={other.slug}
+              data-ga-source={`work_${work.slug}`}
+              class="group bg-bg-surface border border-border-light rounded-card p-md hover:border-primary-500 transition-colors"
+            >
+              <h3 class="text-subheading text-text-primary font-semibold group-hover:text-primary-700 transition-colors">{other.title}</h3>
+              <p class="text-body text-text-secondary mt-xs leading-relaxed">{other.summary}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="text-center pt-md">
+        <a
+          href={companyData.careerSheetUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-ga-event="career_sheet_click"
+          data-ga-location="work_detail_footer"
+          class="inline-flex items-center gap-xs text-body text-primary-600 hover:text-primary-700 hover:underline font-medium"
+        >
+          すべての実績（職務経歴書）を見る →
+        </a>
+      </section>
+    </article>
+  </main>
+
+  <SiteFooter companyName={companyData.companyName} companyNameEn={companyData.companyNameEn} />
+</Layout>
+
+<script is:inline define:vars={{ slug: work.slug, title: work.title }}>
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+    window.gtag('event', 'work_detail_view', { slug, title });
+  }
+</script>

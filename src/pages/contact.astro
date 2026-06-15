@@ -1,0 +1,109 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import type { CompanyData, CtaContext } from '@/lib/types';
+import data from '@/lib/company-data.json';
+
+const companyData = data as CompanyData;
+
+const contextLabels: Record<CtaContext | 'general', string> = {
+  new: '新規開発のご相談',
+  improve: '既存システム改善のご相談',
+  ai: 'AI機能導入のご相談',
+  general: 'ご相談一般',
+};
+---
+
+<Layout
+  title="お問い合わせ | 株式会社バリアントコード"
+  description="初回相談は無料・オンライン30〜60分。要件が未整理の段階でも相談可能です。対応規模・対応工程・相談後の進め方についてご案内します。"
+>
+  <Header companyName={companyData.companyName} />
+
+  <main class="pt-header">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 md:px-10 py-xl md:py-2xl space-y-xl">
+      <header class="space-y-sm">
+        <p class="text-small uppercase tracking-[0.2em] text-primary-600 font-semibold">Contact</p>
+        <h1 class="text-3xl sm:text-4xl font-bold text-text-primary leading-tight">ご相談内容をお聞かせください</h1>
+        <p class="text-body sm:text-lg text-text-secondary leading-relaxed">
+          初回相談はオンライン30〜60分、無料です。要件が固まっていない段階でも問題ありません。まず以下をご確認のうえ、フォームにお進みください。
+        </p>
+      </header>
+
+      <section class="space-y-sm">
+        <h2 class="text-sectionHeading text-text-primary font-bold">相談前にご確認いただきたいこと</h2>
+        <ul class="space-y-xs bg-bg-surface border border-border-light rounded-card p-lg">
+          {companyData.contactExpectations.preBrief.map(text => (
+            <li class="flex gap-sm items-center">
+              <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary-500 flex-shrink-0" aria-hidden="true"></span>
+              <span class="text-body text-text-primary leading-relaxed">{text}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="space-y-sm">
+        <h2 class="text-sectionHeading text-text-primary font-bold">ご相談後の進め方</h2>
+        <ol class="space-y-sm">
+          {companyData.contactExpectations.afterBrief.map((text, index) => (
+            <li class="flex gap-md items-start bg-bg-surface border border-border-light rounded-card p-md">
+              <span class="flex-shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full bg-text-primary text-white text-small font-mono tabular-nums font-semibold">
+                {index + 1}
+              </span>
+              <span class="text-body text-text-primary leading-relaxed pt-0.5">{text}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="space-y-sm bg-bg-section border border-border-light rounded-card p-lg">
+        <h2 class="text-sectionHeading text-text-primary font-bold">お問い合わせフォーム</h2>
+        <p id="context-note" class="text-body text-text-secondary leading-relaxed" data-context-labels={JSON.stringify(contextLabels)}>
+          ご相談内容: <span id="context-label" class="font-semibold text-text-primary">{contextLabels.general}</span>
+        </p>
+        <p class="text-body text-text-secondary leading-relaxed">
+          下のボタンから Google Form にお進みください。差し支えなければ、自由記述欄にご相談内容・現在の状況・検討している期間などをご記入ください。
+        </p>
+        <div class="pt-xs">
+          <a
+            id="contact-form-link"
+            href={companyData.contactFormUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-ga-event="google_form_redirect"
+            class="inline-flex items-center gap-xs px-6 py-3 bg-text-primary text-white rounded-lg hover:bg-primary-700 transition-colors text-body font-medium"
+          >
+            お問い合わせフォームへ
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+        <p class="text-small text-text-tertiary pt-xs">
+          メールでのご連絡をご希望の場合は <a href={`mailto:${companyData.contact.email}`} class="text-primary-600 hover:underline">{companyData.contact.email}</a> までお願いします。
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <SiteFooter companyName={companyData.companyName} companyNameEn={companyData.companyNameEn} />
+</Layout>
+
+<script is:inline>
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var context = params.get('context') || 'general';
+    var note = document.getElementById('context-note');
+    var label = document.getElementById('context-label');
+    var link = document.getElementById('contact-form-link');
+    var labels = note && note.dataset.contextLabels ? JSON.parse(note.dataset.contextLabels) : {};
+    if (label && labels[context]) {
+      label.textContent = labels[context];
+    }
+    if (link) {
+      link.setAttribute('data-ga-context', context);
+    }
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'contact_page_view', { context: context });
+    }
+  })();
+</script>

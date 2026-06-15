@@ -1,0 +1,45 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import type { CompanyData } from '@/lib/types';
+import data from '@/lib/company-data.json';
+
+const companyData = data as CompanyData;
+---
+
+<Layout
+  title="採用・協業 | 株式会社バリアントコード"
+  description="フリーランスエンジニアの方とのつながりを募集しています。常駐案件、請負／業務委託案件、技術交流など、メールにて情報共有いたします。"
+>
+  <Header companyName={companyData.companyName} />
+
+  <main class="pt-header">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 md:px-10 py-xl md:py-2xl space-y-xl">
+      <header class="space-y-sm">
+        <p class="text-small uppercase tracking-[0.2em] text-primary-600 font-semibold">Recruit &amp; Collaboration</p>
+        <h1 class="text-3xl sm:text-4xl font-bold text-text-primary leading-tight">採用・協業のご案内</h1>
+      </header>
+
+      <section class="space-y-sm bg-bg-surface border border-border-light rounded-card p-lg">
+        <h2 class="text-sectionHeading text-text-primary font-bold">{companyData.recruit.freelance.title}</h2>
+        <div class="space-y-sm">
+          {companyData.recruit.freelance.description.map(text => (
+            <p class="text-body text-text-primary leading-relaxed">{text}</p>
+          ))}
+        </div>
+        <div class="pt-sm">
+          <a
+            href={`mailto:${companyData.contact.email}`}
+            class="inline-flex items-center gap-xs px-5 py-2.5 bg-text-primary text-white rounded-lg hover:bg-primary-700 transition-colors text-body font-medium"
+          >
+            メールで連絡する
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <SiteFooter companyName={companyData.companyName} companyNameEn={companyData.companyNameEn} />
+</Layout>

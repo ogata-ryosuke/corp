@@ -1,0 +1,36 @@
+---
+import type { OverviewItem } from '@/lib/types';
+
+interface Props {
+  overview: OverviewItem[];
+}
+
+const { overview } = Astro.props;
+---
+
+<section id="overview" class="space-y-sm scroll-mt-[72px]">
+  <div class="space-y-xs">
+    <p class="text-small uppercase tracking-[0.2em] text-primary-600 font-semibold">Company</p>
+    <h2 class="text-sectionHeading md:text-2xl text-text-primary font-bold">会社概要</h2>
+  </div>
+  <div class="bg-bg-surface border border-border-light rounded-card p-lg">
+    <table class="w-full">
+      <tbody>
+        {overview.map(item => (
+          <tr class="border-b border-border-light last:border-0">
+            <th class="py-3 pr-4 text-left align-top text-body font-semibold text-text-primary whitespace-nowrap w-[120px] sm:w-[160px]">
+              {item.label}
+            </th>
+            <td class="py-3 text-body text-text-secondary whitespace-pre-line">
+              {item.isLink ? (
+                <a href={item.value} target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:underline">{item.value}</a>
+              ) : (
+                item.value
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+---
+interface Props {
+  consultations: string[];
+}
+
+const { consultations } = Astro.props;
+---
+
+<section id="consultations" class="space-y-lg scroll-mt-[72px]">
+  <div class="space-y-xs">
+    <p class="text-small uppercase tracking-[0.2em] text-primary-600 font-semibold">Who we help</p>
+    <h2 class="text-sectionHeading md:text-2xl text-text-primary font-bold">向いている相談</h2>
+  </div>
+  <ul class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+    {consultations.map(text => (
+      <li class="flex gap-sm items-center bg-bg-surface border border-border-light rounded-card p-md">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary-500 flex-shrink-0" aria-hidden="true"></span>
+        <p class="text-body text-text-primary leading-relaxed">{text}</p>
+      </li>
+    ))}
+  </ul>
+</section>

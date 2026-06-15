@@ -1,0 +1,35 @@
+---
+import type { CtaVariant } from '@/lib/types';
+
+interface Props {
+  ctaVariants: CtaVariant[];
+}
+
+const { ctaVariants } = Astro.props;
+---
+
+<section id="contact" class="space-y-lg scroll-mt-[72px]">
+  <div class="space-y-xs">
+    <p class="text-small uppercase tracking-[0.2em] text-primary-600 font-semibold">Contact</p>
+    <h2 class="text-sectionHeading md:text-2xl text-text-primary font-bold">ご相談はこちらから</h2>
+    <p class="text-body text-text-secondary max-w-2xl">
+      初回相談はオンライン30〜60分、無料です。要件が未整理の段階でも構いません。用途に近いものからお選びください。
+    </p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+    {ctaVariants.map(cta => (
+      <a
+        href={`/contact/?context=${cta.context}`}
+        data-ga-event="cta_click"
+        data-ga-context={cta.context}
+        class="group bg-text-primary text-white rounded-card p-lg flex flex-col gap-sm hover:bg-primary-700 transition-colors"
+      >
+        <h3 class="text-subheading font-semibold flex items-center justify-between">
+          {cta.label}
+          <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+        </h3>
+        <p class="text-body text-white/80 leading-relaxed">{cta.description}</p>
+      </a>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,50 @@
+---
+import type { FeaturedWork } from '@/lib/types';
+
+interface Props {
+  works: FeaturedWork[];
+  careerSheetUrl: string;
+}
+
+const { works, careerSheetUrl } = Astro.props;
+---
+
+<section id="works" class="space-y-lg scroll-mt-[72px]">
+  <div class="flex items-end justify-between gap-md flex-wrap">
+    <div class="space-y-xs">
+      <p class="text-small uppercase tracking-[0.2em] text-primary-600 font-semibold">Featured Works</p>
+      <h2 class="text-sectionHeading md:text-2xl text-text-primary font-bold">代表実績</h2>
+    </div>
+    <a
+      href={careerSheetUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-ga-event="career_sheet_click"
+      data-ga-location="works_section"
+      class="text-body text-primary-600 hover:text-primary-700 hover:underline font-medium"
+    >
+      実績一覧（職務経歴書）→
+    </a>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+    {works.map(work => (
+      <a
+        href={`/works/${work.slug}/`}
+        data-ga-event="work_card_click"
+        data-ga-slug={work.slug}
+        class="group bg-bg-surface border border-border-light rounded-card p-lg flex flex-col gap-sm hover:border-primary-500 hover:shadow-sm transition-all"
+      >
+        <h3 class="text-subheading text-text-primary font-semibold group-hover:text-primary-700 transition-colors">
+          {work.title}
+        </h3>
+        <p class="text-body text-text-secondary leading-relaxed flex-1">{work.summary}</p>
+        <div class="flex flex-wrap gap-1.5 pt-xs">
+          {work.tech.slice(0, 4).map(t => (
+            <span class="text-small text-text-secondary bg-bg-section px-2 py-0.5 rounded">{t}</span>
+          ))}
+        </div>
+        <span class="text-small text-primary-600 font-medium pt-xs group-hover:underline">詳細を見る →</span>
+      </a>
+    ))}
+  </div>
+</section>

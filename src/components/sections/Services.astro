@@ -1,0 +1,40 @@
+---
+import type { Service } from '@/lib/types';
+
+interface Props {
+  services: Service[];
+}
+
+const { services } = Astro.props;
+---
+
+<section id="services" class="space-y-lg scroll-mt-[72px]">
+  <div class="space-y-xs">
+    <p class="text-small uppercase tracking-[0.2em] text-primary-600 font-semibold">Services</p>
+    <h2 class="text-sectionHeading md:text-2xl text-text-primary font-bold">提供サービス</h2>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+    {services.map((service, index) => (
+      <article class="group bg-bg-surface border border-border-light rounded-card p-lg flex flex-col gap-sm hover:border-primary-500 transition-colors">
+        <div class="flex items-baseline gap-sm">
+          <span class="text-small text-primary-600 font-mono tabular-nums">{String(index + 1).padStart(2, '0')}</span>
+          <h3 class="text-subheading text-text-primary font-semibold">{service.title}</h3>
+        </div>
+        <dl class="space-y-sm pt-xs border-t border-border-light/60">
+          <div>
+            <dt class="text-small uppercase tracking-wide text-text-tertiary font-semibold">対象</dt>
+            <dd class="text-body text-text-secondary leading-relaxed mt-0.5">{service.targetCustomer}</dd>
+          </div>
+          <div>
+            <dt class="text-small uppercase tracking-wide text-text-tertiary font-semibold">課題</dt>
+            <dd class="text-body text-text-secondary leading-relaxed mt-0.5">{service.problem}</dd>
+          </div>
+          <div>
+            <dt class="text-small uppercase tracking-wide text-text-tertiary font-semibold">提供価値</dt>
+            <dd class="text-body text-text-primary leading-relaxed mt-0.5">{service.solution}</dd>
+          </div>
+        </dl>
+      </article>
+    ))}
+  </div>
+</section>

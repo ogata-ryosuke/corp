@@ -1,12 +1,217 @@
 {
   "companyName": "株式会社バリアントコード",
   "companyNameEn": "Variant Code Co., Ltd.",
-  "tagline": "プログラミングを楽しむ",
-  "subtitle": "Webシステム・スマホアプリ・基幹システム構築開発",
   "contact": {
-    "email": "ogata.ryosuke@variantcode.co.jp",
-    "phone": "080-5683-8638"
+    "email": "ogata.ryosuke@variantcode.co.jp"
   },
+  "careerSheetUrl": "https://cs.variantcode.co.jp/",
+  "contactFormUrl": "https://forms.gle/kTrm7gXFGnHjedww7",
+  "heroMessaging": {
+    "headline": "相談を、要件整理と改善につなげる。",
+    "sub": "新規開発、既存システムの改善、AI機能の組み込みまで。要件整理から評価・運用の整備まで扱います。"
+  },
+  "services": [
+    {
+      "id": "new-dev",
+      "title": "新規Web/モバイルアプリ開発",
+      "targetCustomer": "新規事業・スタートアップ／社内新規プロダクト担当",
+      "problem": "要件が固まっていない。小規模で素早く形にしたい。",
+      "solution": "要件整理から設計・実装・リリース・初期運用まで一貫して担当します。PoC起点でも対応可能です。"
+    },
+    {
+      "id": "improve",
+      "title": "既存システムの改善・再設計",
+      "targetCustomer": "既存プロダクトに負債を抱えたチーム",
+      "problem": "開発速度が落ちている／属人化している／技術更新が止まっている。",
+      "solution": "コード・アーキ・運用の棚卸しから、段階的リファクタと再設計を実施します。着手前の調査・判断段階から相談可能です。"
+    },
+    {
+      "id": "ai",
+      "title": "AI/LLM機能の開発と評価運用設計",
+      "targetCustomer": "AI機能を組み込みたい事業会社",
+      "problem": "プロトタイプは動くが、品質評価・運用設計が整っていない。",
+      "solution": "機能設計・プロンプト設計・評価基盤・改善サイクル運用までを含めて構築します。既存プロダクトへの組み込みにも対応します。"
+    }
+  ],
+  "targetConsultations": [
+    "要件がまだ固まりきっていない段階から相談したい",
+    "少人数・短サイクルで進めたい",
+    "開発だけでなく要件整理・設計・ドキュメント化も任せたい",
+    "既存コードや構成に負債があり、手を入れる判断から相談したい",
+    "AI機能の「作れる」だけでなく「継続的に良くしていく」仕組みまで欲しい"
+  ],
+  "featuredWorks": [
+    {
+      "slug": "ai-document-review",
+      "title": "AI文書レビュープラットフォーム",
+      "summary": "法務・契約書レビュー業務を効率化するエンタープライズ向けLLMレビュー基盤。プロンプト改善サイクルと評価基盤の設計・実装を担当。",
+      "background": [
+        "法務・契約書などのドキュメントレビュー業務は、観点の抜け漏れや属人化が起きやすく、レビュー品質のばらつきが課題となる領域です。",
+        "本プラットフォームはPDF／Word／PowerPointをアップロードし、ドキュメント種別ごとに準備したレビュー観点に基づいてLLMがレビューを実施する仕組みを提供します。",
+        "エンタープライズ利用のため、単発の出力品質だけでなく、利用者フィードバックを改善に反映し続ける運用設計が要件でした。"
+      ],
+      "scope": [
+        "要件定義",
+        "基本設計／詳細設計",
+        "実装",
+        "結合テスト／総合テスト",
+        "保守"
+      ],
+      "tech": [
+        "TypeScript",
+        "Next.js",
+        "React",
+        "tRPC",
+        "Prisma",
+        "PostgreSQL",
+        "OpenAI",
+        "promptfoo",
+        "DSPy",
+        "Terraform",
+        "GCP",
+        "Vitest"
+      ],
+      "approach": [
+        "フィードバック活用・改善プロジェクトの中で、LLMを主軸にしたプロンプト改善の提案と実装を担当しました。",
+        "DSPyの自動プロンプト調整フローを参考に、プロンプト担当者が改善サイクルを回しやすくするツールを構築しました。",
+        "promptfooのllm-rubricを用いた評価ロジックを追加し、プロンプト改善の前後で品質を定量比較できる基盤を整備しました。",
+        "ログ基盤は障害検知だけでなく、AI機能の失敗傾向を観測して改善テーマに落とし込む観測基盤として設計しました。"
+      ],
+      "outcome": [
+        "プロンプトの変更が品質に与える影響を定量的に評価できるようになり、改善作業が「勘」から「計測可能な作業」に転換しました。",
+        "利用者フィードバックを拾い上げて改善テーマに落とし込むワークフローが回り始めました。"
+      ],
+      "idealFor": [
+        "LLM機能のプロトタイプは動くが、品質を継続的に良くしていく仕組みがない",
+        "プロンプト改善が属人化しており、変更の影響がわからない",
+        "利用者フィードバックを改善に反映する導線が整っていない",
+        "エンタープライズ向けで、評価・観測・運用まで含めた基盤が必要"
+      ]
+    },
+    {
+      "slug": "ai-learning-mobile",
+      "title": "AI学習支援モバイルアプリ",
+      "summary": "数学などの問題文画像から解き方を提示する学習支援アプリ。RAG／LLM機能の設計と評価基盤の整備を担当。",
+      "background": [
+        "学習アプリの核となる「問題解説」は、正答を示すだけでなく、学習者にとって理解しやすい形で解法の選択肢を提示できるかが価値を決めます。",
+        "本アプリでは既存の数学問題解説機能に加え、複数の解法方針がある問題ではそれぞれの方針ごとに解説を閲覧できる機能を追加しました。",
+        "生成AIの出力だけに頼らず、アプリ・API・検索基盤のどこに何の責務を置くかを明確にし、精度と保守性の両立を図る必要がありました。"
+      ],
+      "scope": [
+        "詳細設計",
+        "実装",
+        "結合テスト"
+      ],
+      "tech": [
+        "Python",
+        "FastAPI",
+        "Flutter",
+        "OpenAI",
+        "RAG",
+        "PostgreSQL",
+        "Firestore",
+        "Firebase",
+        "GCP",
+        "LangSmith"
+      ],
+      "approach": [
+        "OpenAI呼び出しにともなうRAGの設計・精査に参画し、検索とモデル呼び出しの責務分離を整理しました。",
+        "複数の解法方針を提示する機能では、正答率だけでなく「利用者が理解しやすい選択肢の出し方」まで設計対象として扱いました。",
+        "promptfoo等を用いたLLM評価テストを導入し、品質担保の手法としてプロジェクトに組み込みました。",
+        "実装初期から検証観点を持つことで、精度改善と保守性を両立できる構成にしました。"
+      ],
+      "outcome": [
+        "AI機能の責務分離が進み、機能追加時の影響範囲が追いやすい構成になりました。",
+        "プロンプトや検索パラメータの変更を評価テストで確認できるようになり、改善判断が安定しました。"
+      ],
+      "idealFor": [
+        "AI機能を既存アプリに組み込みたいが、どこに責務を置くか決めきれていない",
+        "RAGを含む構成で、精度改善と保守性を両立させたい",
+        "生成AIを使った機能に評価観点を入れたい",
+        "モバイルアプリとAIバックエンドを一体で相談したい"
+      ]
+    },
+    {
+      "slug": "social-game-platform",
+      "title": "スマホ向けブラウザゲーム開発",
+      "summary": "ブラウザ向けソーシャルゲームのサーバ・フロント開発を長期担当。混成チームでの運用・監視・新人教育までを含む継続開発経験。",
+      "background": [
+        "ブラウザ向けソーシャルゲームは、トラフィック変動が大きく、長期運用下でのDB性能劣化や障害対応が事業継続に直結する領域です。",
+        "本プロジェクトはリーダー・シニア・新卒を含む混成構成のサーバチームで、開発だけでなく運用・監視・スキル共有・新人教育まで含めた体制運用が前提でした。",
+        "長期にわたる継続開発の中で、機能追加と性能維持の両立が求められました。"
+      ],
+      "scope": [
+        "要件定義",
+        "基本設計／詳細設計",
+        "実装",
+        "結合テスト／総合テスト",
+        "保守・運用"
+      ],
+      "tech": [
+        "Java",
+        "Spring",
+        "Python",
+        "Flask",
+        "HTML/CSS",
+        "JavaScript",
+        "MySQL",
+        "nginx",
+        "Munin"
+      ],
+      "approach": [
+        "サーバメイン・フロント兼務で、混成チーム内での情報伝達と設計レビューを主導しました。",
+        "Muninなどの監視ツールの運用やスロークエリの観察・対処を継続的に行い、長期運用下でのDB性能維持に取り組みました。",
+        "週1回のチーム内勉強会を運営し、スキル共有と新人教育を開発業務に組み込みました。",
+        "誰もが提案・指摘をしやすい開発文化を維持することを重視しました。"
+      ],
+      "outcome": [
+        "長期運用下のDB性能問題を継続的に対処し、機能追加と性能維持を両立しました。",
+        "新人を含む混成チームでの安定した開発・運用体制を構築しました。"
+      ],
+      "idealFor": [
+        "長期運用が前提のサーバ／ゲーム／Webサービス開発",
+        "少人数混成チームでの開発・運用・教育を一体で進めたい",
+        "負荷試験・監視・DB性能チューニングまで含めた相談",
+        "新規開発だけでなく、既存サービスの安定運用フェーズを任せたい"
+      ]
+    }
+  ],
+  "ctaVariants": [
+    {
+      "context": "new",
+      "label": "新規開発を相談する",
+      "description": "PoCや新規プロダクトの立ち上げを、要件整理から一緒に進めます。"
+    },
+    {
+      "context": "improve",
+      "label": "既存システムの改善を相談する",
+      "description": "コード・アーキ・運用の棚卸しから、段階的な改善を提案します。"
+    },
+    {
+      "context": "ai",
+      "label": "AI機能の導入を相談する",
+      "description": "設計・評価・運用までを含めたAI機能の組み込みを支援します。"
+    }
+  ],
+  "contactExpectations": {
+    "preBrief": [
+      "対応規模: 個人〜中規模プロダクト／少人数チーム前提",
+      "入れる工程: 要件整理・設計・実装・運用・既存コード調査のいずれからでも可",
+      "要件が未整理の段階でも相談可能",
+      "言語・フレームワークの指定がある場合も対応可"
+    ],
+    "afterBrief": [
+      "初回相談（オンライン30〜60分／無料）で状況と目的を整理します",
+      "対応可否・概算規模・進め方の提案を提示します",
+      "合意後、見積と契約条件を提示します",
+      "契約締結後、着手します"
+    ]
+  },
+  "message": [
+    "顧客とのコミュニケーションを密にとり、真の要求を正確に聞き出す",
+    "掘り出した要求を設計として定量化する",
+    "プログラミング技術を駆使して形にする"
+  ],
   "overview": [
     {
       "label": "社名",
@@ -18,217 +223,18 @@
     },
     {
       "label": "所在地",
-      "value": "〒206-0025 東京都多摩市永山1-12-3 フォレッジ多摩永山204"
+      "value": "〒192-0082 東京都八王子市東町1番14号橋完ビル4階E号室"
     },
     {
       "label": "代表者",
       "value": "小方 亮佑"
     },
     {
-      "label": "電話番号",
-      "value": "080-5683-8638（代表）"
-    },
-    {
       "label": "メールアドレス",
       "value": "ogata.ryosuke@variantcode.co.jp"
     }
   ],
-  "message": [
-    "顧客とのコミュニケーションを密にとり、真の要求を正確に聞き出す",
-    "掘り出した要求を設計として定量化する",
-    "プログラミング技術を駆使して形にする"
-  ],
-  "services": [
-    {
-      "title": "豊富な開発言語",
-      "description": "複数の言語を扱うことができます。お客様でメンテ可能な言語で開発可能です。"
-    },
-    {
-      "title": "アプリ",
-      "description": "Android、iOSアプリ同時開発が可能です。一括開発で設計の手間を省きます。"
-    },
-    {
-      "title": "BizDevOps",
-      "description": "大事な本番運用をサポートします。開発終了後の改修をスムーズに進めるノウハウを提供します。"
-    }
-  ],
-  "achievements": [
-    {
-      "title": "過去の開発実績1",
-      "subtitle": "チケット決済アプリ&管理画面構築案件",
-      "description": "要件整理から、Android/iOSアプリ〜サーバAPI〜DBまで、環境インストール込みのECサイト一括請負開発案件（小〜大規模相当まで実績あり）"
-    },
-    {
-      "title": "過去の開発実績2",
-      "subtitle": "ELKオンプレ構築案件",
-      "description": "既存セキュリティソフトサーバ群のログ（1日300GB）集約基盤構築。基本設計〜ELK Stackのインストール、設定、実装を担当。"
-    }
-  ],
-  "techStack": [
-    {
-      "name": "Python",
-      "items": [
-        "Pyramid",
-        "Django",
-        "Bottle",
-        "SQLAlchemy"
-      ]
-    },
-    {
-      "name": "Java",
-      "items": [
-        "Spring Framework",
-        "Spring Boot",
-        "Guava",
-        "Swing",
-        "MyBatis",
-        "Hibernate",
-        "JPA",
-        "JUnit",
-        "Groovy"
-      ]
-    },
-    {
-      "name": "PHP",
-      "items": [
-        "Laravel",
-        "Symfony",
-        "FuelPHP",
-        "CakePHP",
-        "Flask",
-        "Smarty",
-        "slim",
-        "PHPUnit"
-      ]
-    },
-    {
-      "name": "Ruby",
-      "items": [
-        "Ruby on Rails"
-      ]
-    },
-    {
-      "name": "Go",
-      "items": [
-        "gin",
-        "GORM"
-      ]
-    },
-    {
-      "name": "HTML/CSS",
-      "items": [
-        "HTML5",
-        "Bootstrap",
-        "Sass",
-        "less",
-        "stylus",
-        "SPA(Single Page Application)"
-      ]
-    },
-    {
-      "name": "JavaScript",
-      "items": [
-        "JQuery",
-        "AngularJS",
-        "Backbone.js",
-        "vue.js",
-        "React.js",
-        "CoffeeScript"
-      ]
-    },
-    {
-      "name": "Android",
-      "items": [
-        "Kotlin",
-        "RxJava",
-        "okhttp",
-        "Retrofit2",
-        "Gson",
-        "ButterKnife",
-        "otto",
-        "android-annotation",
-        "OpenGL"
-      ]
-    },
-    {
-      "name": "iOS",
-      "items": [
-        "Objective-C",
-        "Swift",
-        "RxSwift"
-      ]
-    },
-    {
-      "name": "DB",
-      "items": [
-        "MySQL",
-        "PostgreSQL",
-        "Oracle",
-        "Salesforce",
-        "SQLite",
-        "Access",
-        "Redis",
-        "memcached"
-      ]
-    },
-    {
-      "name": "Server",
-      "items": [
-        "Redhat",
-        "CentOS",
-        "Apache",
-        "Tomcat",
-        "nginx"
-      ]
-    },
-    {
-      "name": "AWS",
-      "items": [
-        "EC2",
-        "RDS",
-        "S3",
-        "Lambda",
-        "Batch",
-        "Elastic Load Balancing",
-        "Elastic Beanstalk"
-      ]
-    },
-    {
-      "name": "Elastic(ELK)",
-      "items": [
-        "ElasticSearch",
-        "Logstash",
-        "Kibana",
-        "Filebeat",
-        "X-Pack",
-        "Monitoring",
-        "Machine Learning"
-      ]
-    },
-    {
-      "name": "DevOps",
-      "items": [
-        "Github",
-        "Jenkins",
-        "Docker",
-        "Ansible",
-        "Selenium",
-        "DBUnit"
-      ]
-    },
-    {
-      "name": "Others",
-      "items": [
-        "Visual Basic 6",
-        "Excel VBA",
-        ".NET Framework",
-        "hubot"
-      ]
-    }
-  ],
   "recruit": {
-    "description": "随時募集中です。興味のある方は、こちらのリンクからご覧ください。",
-    "indeedUrl": "https://www.indeedjobs.com/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%83%90%E3%83%AA%E3%82%A2%E3%83%B3%E3%83%88%E3%82%B3%E3%83%BC%E3%83%89/jobs",
     "freelance": {
       "title": "フリーランスエンジニア支援",
       "description": [

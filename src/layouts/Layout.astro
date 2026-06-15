@@ -70,6 +70,30 @@ const orgJsonLd = {
   </head>
   <body class="bg-bg-page">
     <slot />
+    <script is:inline>
+      (function () {
+        if (typeof document === 'undefined') return;
+        document.addEventListener('click', function (event) {
+          var target = event.target;
+          if (!(target instanceof Element)) return;
+          var trigger = target.closest('[data-ga-event]');
+          if (!trigger) return;
+          var name = trigger.getAttribute('data-ga-event');
+          if (!name || typeof window.gtag !== 'function') return;
+          var params = {};
+          for (var i = 0; i < trigger.attributes.length; i++) {
+            var attr = trigger.attributes[i];
+            if (attr.name.indexOf('data-ga-') === 0 && attr.name !== 'data-ga-event') {
+              var key = attr.name.substring('data-ga-'.length).replace(/-([a-z])/g, function (_, c) {
+                return c.toUpperCase();
+              });
+              params[key] = attr.value;
+            }
+          }
+          window.gtag('event', name, params);
+        });
+      })();
+    </script>
   </body>
 </html>
 

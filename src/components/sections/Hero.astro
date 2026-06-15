@@ -1,0 +1,42 @@
+---
+import type { HeroMessaging } from '@/lib/types';
+
+interface Props {
+  heroMessaging: HeroMessaging;
+  careerSheetUrl: string;
+}
+
+const { heroMessaging, careerSheetUrl } = Astro.props;
+---
+
+<section class="relative py-2xl md:py-2xl">
+  <div class="absolute inset-0 bg-gradient-to-b from-primary-50/40 via-transparent to-transparent pointer-events-none"></div>
+  <div class="relative max-w-4xl space-y-lg">
+    <p class="text-small uppercase tracking-[0.2em] text-primary-600 font-semibold">Variant Code — Development Partner</p>
+    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary leading-[1.15] tracking-tight text-balance">
+      {heroMessaging.headline}
+    </h1>
+    <p class="text-body sm:text-lg text-text-secondary leading-relaxed max-w-3xl">
+      {heroMessaging.sub}
+    </p>
+    <div class="flex flex-col sm:flex-row gap-md pt-sm">
+      <a
+        href="#contact"
+        class="inline-flex items-center justify-center gap-xs px-6 py-3 bg-text-primary text-white rounded-lg hover:bg-primary-700 transition-colors text-body font-medium"
+      >
+        案件のご相談
+        <span aria-hidden="true">→</span>
+      </a>
+      <a
+        href={careerSheetUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-ga-event="career_sheet_click"
+        data-ga-location="hero"
+        class="inline-flex items-center justify-center gap-xs px-6 py-3 border border-border-light text-text-primary rounded-lg hover:bg-bg-section transition-colors text-body font-medium"
+      >
+        職務経歴書を見る
+      </a>
+    </div>
+  </div>
+</section>

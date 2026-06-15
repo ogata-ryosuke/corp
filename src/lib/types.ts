@@ -1,25 +1,30 @@
 export interface CompanyData {
   companyName: string;
   companyNameEn: string;
-  tagline: string;
-  subtitle: string;
   contact: {
     email: string;
-    phone: string;
   };
-  overview: OverviewItem[];
-  message: string[];
+  careerSheetUrl: string;
+  contactFormUrl: string;
+  heroMessaging: HeroMessaging;
   services: Service[];
-  achievements: Achievement[];
-  techStack: TechCategory[];
+  targetConsultations: string[];
+  featuredWorks: FeaturedWork[];
+  ctaVariants: CtaVariant[];
+  contactExpectations: ContactExpectations;
+  message: string[];
+  overview: OverviewItem[];
   recruit: {
-    description: string;
-    indeedUrl: string;
     freelance: {
       title: string;
       description: string[];
     };
   };
+}
+
+export interface HeroMessaging {
+  headline: string;
+  sub: string;
 }
 
 export interface OverviewItem {
@@ -29,17 +34,34 @@ export interface OverviewItem {
 }
 
 export interface Service {
+  id: string;
   title: string;
+  targetCustomer: string;
+  problem: string;
+  solution: string;
+}
+
+export interface FeaturedWork {
+  slug: string;
+  title: string;
+  summary: string;
+  background: string[];
+  scope: string[];
+  tech: string[];
+  approach: string[];
+  outcome: string[];
+  idealFor: string[];
+}
+
+export type CtaContext = 'new' | 'improve' | 'ai';
+
+export interface CtaVariant {
+  context: CtaContext;
+  label: string;
   description: string;
 }
 
-export interface Achievement {
-  title: string;
-  subtitle: string;
-  description: string;
-}
-
-export interface TechCategory {
-  name: string;
-  items: string[];
+export interface ContactExpectations {
+  preBrief: string[];
+  afterBrief: string[];
 }

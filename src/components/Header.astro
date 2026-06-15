@@ -6,25 +6,94 @@ interface Props {
 const { companyName } = Astro.props;
 
 const navItems = [
-  { label: '会社概要', href: '#overview' },
-  { label: '代表メッセージ', href: '#message' },
-  { label: '開発実績', href: '#performance' },
-  { label: '採用', href: '#recruit' },
+  { label: 'サービス', href: '/#services' },
+  { label: '向いている相談', href: '/#consultations' },
+  { label: '実績', href: '/#works' },
+  { label: '会社概要', href: '/#overview' },
 ];
+
+const focusRing =
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-surface';
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 h-header bg-bg-surface border-b border-border-light">
+<header class="fixed top-0 left-0 right-0 z-50 h-header bg-bg-surface/90 backdrop-blur border-b border-border-light">
   <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-20 h-full flex items-center justify-between">
-    <div class="flex items-center gap-md">
-      <h1 class="text-header text-text-primary font-bold">{companyName}</h1>
-    </div>
+    <a
+      href="/"
+      class={`flex items-center gap-md rounded-sm hover:opacity-80 transition-opacity ${focusRing}`}
+    >
+      <span class="text-header text-text-primary font-bold tracking-tight">{companyName}</span>
+    </a>
 
-    <nav class="hidden sm:flex items-center gap-lg">
+    {/* Desktop navigation */}
+    <nav aria-label="グローバルナビゲーション" class="hidden md:flex items-center gap-lg">
       {navItems.map(item => (
-        <a href={item.href} class="text-body text-text-secondary hover:text-text-primary transition-colors">
+        <a
+          href={item.href}
+          class={`text-body text-text-secondary hover:text-text-primary transition-colors rounded-sm ${focusRing}`}
+        >
           {item.label}
         </a>
       ))}
+      <a
+        href="/contact/"
+        class={`inline-flex items-center gap-xs px-4 py-1.5 bg-text-primary text-white rounded-md hover:bg-primary-700 transition-colors text-body font-medium ${focusRing}`}
+      >
+        お問い合わせ
+      </a>
     </nav>
+
+    {/* Mobile navigation (JS-enhanced disclosure, accessible without JS) */}
+    <details id="mobile-nav" class="md:hidden group">
+      <summary
+        class={`list-none [&::-webkit-details-marker]:hidden flex items-center justify-center w-10 h-10 -mr-2 rounded-md cursor-pointer text-text-primary hover:bg-bg-section transition-colors ${focusRing}`}
+        aria-label="メニューを開閉する"
+      >
+        <svg class="w-6 h-6 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+        <svg class="w-6 h-6 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="6" y1="6" x2="18" y2="18" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+        </svg>
+      </summary>
+      <div class="fixed inset-x-0 top-[56px] bg-bg-surface border-b border-border-light shadow-lg max-h-[calc(100dvh-56px)] overflow-y-auto">
+        <nav aria-label="モバイルナビゲーション" class="max-w-[1440px] mx-auto flex flex-col px-4 sm:px-6 py-sm">
+          {navItems.map(item => (
+            <a
+              href={item.href}
+              class={`py-3 text-body text-text-primary border-b border-border-light last:border-0 hover:text-primary-700 transition-colors rounded-sm ${focusRing}`}
+            >
+              {item.label}
+            </a>
+          ))}
+          <a
+            href="/contact/"
+            class={`mt-sm inline-flex items-center justify-center gap-xs px-4 py-3 bg-text-primary text-white rounded-md hover:bg-primary-700 transition-colors text-body font-medium ${focusRing}`}
+          >
+            お問い合わせ
+          </a>
+        </nav>
+      </div>
+    </details>
   </div>
 </header>
+
+<script is:inline>
+  (function () {
+    var nav = document.getElementById('mobile-nav');
+    if (!nav) return;
+    var close = function () {
+      nav.removeAttribute('open');
+    };
+    nav.addEventListener('click', function (event) {
+      var target = event.target;
+      if (target instanceof Element && target.closest('a')) close();
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') close();
+    });
+  })();
+</script>

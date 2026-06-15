@@ -1,132 +1,37 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Header from '@/components/Header.astro';
+import Hero from '@/components/sections/Hero.astro';
+import Services from '@/components/sections/Services.astro';
+import TargetConsultations from '@/components/sections/TargetConsultations.astro';
+import FeaturedWorks from '@/components/sections/FeaturedWorks.astro';
+import ContactCTA from '@/components/sections/ContactCTA.astro';
+import Message from '@/components/sections/Message.astro';
+import CompanyOverview from '@/components/sections/CompanyOverview.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
 import type { CompanyData } from '@/lib/types';
 import data from '@/lib/company-data.json';
 
 const companyData = data as CompanyData;
-
-const achievementImages = [
-  '/images/top/result_webapp.jpg',
-  '/images/top/result_elk.jpg',
-];
 ---
 
-<Layout title="株式会社バリアントコード">
+<Layout
+  title="株式会社バリアントコード | 受託開発・AI機能開発・既存システム改善"
+  description="要件整理から設計・実装・運用まで一貫対応。新規Web／モバイルアプリ開発、既存システム改善・再設計、AI／LLM機能の開発と評価運用設計を支援します。"
+>
   <Header companyName={companyData.companyName} />
 
   <main class="pt-header">
-    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-20 py-6 md:py-xl space-y-8 md:space-y-xl">
-
-      {/* Hero Section */}
-      <section class="text-center py-xl space-y-lg">
-        <h2 class="text-3xl sm:text-4xl font-bold text-text-primary leading-snug">
-          Web・アプリ・基幹システムの<br class="sm:hidden" />開発パートナー
-        </h2>
-        <p class="text-body sm:text-lg text-text-secondary max-w-2xl mx-auto">
-          多言語・フルスタック対応のソフトウェア開発会社です。<br />
-          技術スタックや経験案件の詳細は職務経歴書をご覧ください。
-        </p>
-        <div class="flex flex-col sm:flex-row justify-center gap-md pt-sm">
-          <a href="https://cs.variantcode.co.jp/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-xs px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-600 transition-colors text-body font-medium">
-            職務経歴書を見る
-          </a>
-          <a href="https://forms.gle/kTrm7gXFGnHjedww7" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-xs px-6 py-3 border border-border-light text-text-primary rounded-lg hover:bg-bg-section transition-colors text-body font-medium">
-            案件のご相談・お問い合わせ
-          </a>
-        </div>
-      </section>
-
-      {/* 会社概要 Section */}
-      <section id="overview" class="space-y-sm scroll-mt-[72px]">
-        <h2 class="text-sectionHeading text-text-primary font-bold">会社概要</h2>
-        <div class="h-px bg-border-light"></div>
-        <div class="bg-bg-surface border border-border-light rounded-card p-lg">
-          <table class="w-full">
-            <tbody>
-              {companyData.overview.map(item => (
-                <tr class="border-b border-border-light last:border-0">
-                  <th class="py-3 pr-4 text-left align-top text-body font-semibold text-text-primary whitespace-nowrap w-[120px] sm:w-[160px]">
-                    {item.label}
-                  </th>
-                  <td class="py-3 text-body text-text-secondary whitespace-pre-line">
-                    {item.isLink ? (
-                      <a href={item.value} target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">{item.value}</a>
-                    ) : (
-                      item.value
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      {/* 代表メッセージ Section */}
-      <section id="message" class="space-y-sm scroll-mt-[72px]">
-        <h2 class="text-sectionHeading text-text-primary font-bold">代表メッセージ</h2>
-        <div class="h-px bg-border-light"></div>
-        <div class="bg-bg-surface border border-border-light rounded-card p-lg">
-          <ul class="space-y-sm">
-            {companyData.message.map(item => (
-              <li class="flex gap-sm items-start">
-                <span class="text-primary mt-0.5">-</span>
-                <p class="text-body text-text-primary leading-relaxed">{item}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* 開発実績 Section */}
-      <section id="performance" class="space-y-sm scroll-mt-[72px]">
-        <h2 class="text-sectionHeading text-text-primary font-bold">開発実績</h2>
-        <div class="h-px bg-border-light"></div>
-
-        {/* 過去の開発実績 */}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
-          {companyData.achievements.map((achievement, i) => (
-            <div class="bg-bg-surface border border-border-light rounded-card p-lg space-y-sm">
-              <h3 class="text-subheading text-text-secondary font-medium">{achievement.title}</h3>
-              <h4 class="text-subheading text-text-primary font-semibold">{achievement.subtitle}</h4>
-              <p class="text-body text-text-secondary">{achievement.description}</p>
-              {achievementImages[i] && (
-                <img src={achievementImages[i]} alt={achievement.subtitle} class="w-full rounded mt-sm" />
-              )}
-            </div>
-          ))}
-        </div>
-
-      </section>
-
-      {/* 採用 Section */}
-      <section id="recruit" class="space-y-sm scroll-mt-[72px]">
-        <h2 class="text-sectionHeading text-text-primary font-bold">採用</h2>
-        <div class="h-px bg-border-light"></div>
-
-        {/* フリーランスエンジニア支援 */}
-        <div class="bg-bg-surface border border-border-light rounded-card p-lg space-y-sm">
-          <h3 class="text-subheading text-text-primary font-semibold">{companyData.recruit.freelance.title}</h3>
-          {companyData.recruit.freelance.description.map(text => (
-            <p class="text-body text-text-secondary">{text}</p>
-          ))}
-        </div>
-      </section>
-
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-20 py-6 md:py-xl space-y-xl md:space-y-2xl">
+      <Hero heroMessaging={companyData.heroMessaging} careerSheetUrl={companyData.careerSheetUrl} />
+      <Services services={companyData.services} />
+      <TargetConsultations consultations={companyData.targetConsultations} />
+      <FeaturedWorks works={companyData.featuredWorks} careerSheetUrl={companyData.careerSheetUrl} />
+      <Message message={companyData.message} />
+      <CompanyOverview overview={companyData.overview} />
+      <ContactCTA ctaVariants={companyData.ctaVariants} />
     </div>
   </main>
 
-  {/* Footer */}
-  <footer class="bg-text-primary text-white mt-xl">
-    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-20 py-lg">
-      <div class="flex flex-col sm:flex-row justify-between items-center gap-md">
-        <div>
-          <h2 class="text-body font-semibold">{companyData.companyName}</h2>
-          <p class="text-small text-text-tertiary">Web開発・アプリ開発・基幹システム設計運用</p>
-        </div>
-        <p class="text-small text-text-tertiary">We are {companyData.companyNameEn}</p>
-      </div>
-    </div>
-  </footer>
+  <SiteFooter companyName={companyData.companyName} companyNameEn={companyData.companyNameEn} />
 </Layout>
