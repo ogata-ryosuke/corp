@@ -50,7 +50,7 @@ const config: Config = {
         'border-light': '#E4E4E7',
         'text-primary': '#09090B',
         'text-secondary': '#71717A',
-        'text-tertiary': '#9CA3AF',
+        'text-tertiary': '#6B7280',
         'icon-success': '#16A34A',
         'tag-selected-bg': '#000000',
         'tag-selected-text': '#FFFFFF',

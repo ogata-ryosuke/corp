@@ -19,9 +19,9 @@ const { overview } = Astro.props;
             <th class="py-3 pr-4 text-left align-top text-body font-semibold text-text-primary whitespace-nowrap w-[120px] sm:w-[160px]">
               {item.label}
             </th>
-            <td class="py-3 text-body text-text-secondary whitespace-pre-line">
+            <td class="py-3 text-body text-text-secondary whitespace-pre-line break-words">
               {item.isLink ? (
-                <a href={item.value} target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:underline">{item.value}</a>
+                <a href={item.value} target="_blank" rel="noopener noreferrer" class="text-primary-700 hover:underline">{item.value}</a>
               ) : (
                 item.value
               )}
