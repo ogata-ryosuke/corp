@@ -1,6 +1,7 @@
 ---
 import '@fontsource-variable/geist';
 import '../styles/globals.css';
+import companyData from '@/lib/company-data.json';
 
 interface Props {
   title?: string;
@@ -18,14 +19,31 @@ const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://variantcod
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://variantcode.co.jp').toString();
 const ogImage = new URL(image, Astro.site ?? 'https://variantcode.co.jp').toString();
 
+const orgDescription =
+  '要件整理から設計・実装・運用まで一貫対応するソフトウェア開発会社。新規Web／モバイルアプリ開発、既存システムの改善・再設計、AI／LLM機能の開発と評価運用設計を支援します。';
+
 const orgJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: '株式会社バリアントコード',
-  alternateName: 'VariantCode Inc.',
+  name: companyData.companyName,
+  alternateName: companyData.companyNameEn,
   url: siteUrl,
   logo: `${siteUrl}/images/top/logo_simple.png`,
-  description,
+  email: companyData.contact.email,
+  foundingDate: '2020-02',
+  description: orgDescription,
+  address: {
+    '@type': 'PostalAddress',
+    postalCode: '192-0082',
+    addressRegion: '東京都',
+    addressLocality: '八王子市',
+    streetAddress: '東町1番14号 橋完ビル4階E号室',
+    addressCountry: 'JP',
+  },
+  founder: {
+    '@type': 'Person',
+    name: '小方 亮佑',
+  },
 };
 ---
 
@@ -60,6 +78,8 @@ const orgJsonLd = {
     <title>{title}</title>
 
     <script is:inline type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />
+
+    <slot name="head" />
 
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-XHLVD4VBSB"></script>
     <script is:inline>
