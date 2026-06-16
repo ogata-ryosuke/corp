@@ -7,6 +7,8 @@ interface Props {
 }
 
 const { overview } = Astro.props;
+
+const isEmail = (value: string): boolean => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value);
 ---
 
 <section id="overview" class="space-y-lg scroll-mt-[72px]">
@@ -22,7 +24,7 @@ const { overview } = Astro.props;
             <td class="py-3 text-body text-text-secondary whitespace-pre-line break-words">
               {item.isLink ? (
                 <a href={item.value} target="_blank" rel="noopener noreferrer" class="text-primary-700 hover:underline">{item.value}</a>
-              ) : item.value.includes('@') ? (
+              ) : isEmail(item.value) ? (
                 <a href={`mailto:${item.value}`} class="text-primary-700 hover:underline">{item.value}</a>
               ) : (
                 item.value
