@@ -79,7 +79,7 @@ const contextLabels: Record<CtaContext | 'general', string> = {
           </a>
         </div>
         <p class="text-small text-text-tertiary pt-xs">
-          メールでのご連絡をご希望の場合は <a href={`mailto:${companyData.contact.email}`} class="text-primary-700 hover:underline">{companyData.contact.email}</a> までお願いします。
+          メールでのご連絡をご希望の場合は <a href={`mailto:${companyData.contact.email}`} data-ga-event="contact_email_fallback" class="text-primary-700 hover:underline">{companyData.contact.email}</a> までお願いします。
         </p>
       </section>
     </div>

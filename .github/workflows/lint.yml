@@ -1,0 +1,46 @@
+name: CI Lint (柱A 計測ガーディアン)
+
+# 柱A: 統計に依存しない決定論的な品質・計測の門番。
+# 退行門番(0件=健全)＋計装ドリフト検知。docs/ga-improvement-agent/09-pillar-a-catalog.md 参照。
+
+on:
+  pull_request:
+    branches: [main, feat/sales-oriented-renewal]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # ga-coverage.mjs が git diff を使うため履歴が必要
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build (astro → dist)
+        run: npm run build
+
+      - name: A1 — 計装ドリフト（新規 <a>/<button> の data-ga-event 欠落）
+        run: npm run lint:ga
+
+      - name: A2 — 壊れたリンク
+        run: npm run lint:links
+
+      - name: A9 — HTML バリデーション
+        run: npm run lint:html
+
+      - name: A7 — Lighthouse / CWV 予算（退行門番）
+        run: npm run lint:lhci
+
+      - name: serve dist（a11y 用）
+        run: npx http-server dist -p 4173 --silent &
+
+      - name: A8 — アクセシビリティ（pa11y / WCAG2AA）
+        run: |
+          npx wait-on http://localhost:4173/ --timeout 15000
+          npm run lint:a11y

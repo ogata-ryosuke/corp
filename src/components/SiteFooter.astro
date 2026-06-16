@@ -25,7 +25,7 @@ const footerLinks = [
       </div>
       <nav aria-label="フッターナビゲーション" class="flex flex-col gap-xs">
         {footerLinks.map(link => (
-          <a href={link.href} class="text-body text-white/70 hover:text-white transition-colors">
+          <a href={link.href} data-ga-event="footer_nav_click" data-ga-label={link.label} class="text-body text-white/70 hover:text-white transition-colors">
             {link.label}
           </a>
         ))}

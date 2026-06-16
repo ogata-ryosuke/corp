@@ -7,7 +7,13 @@
         "dev": "astro dev",
         "build": "astro build",
         "preview": "astro preview",
-        "astro": "astro"
+        "astro": "astro",
+        "lint:links": "linkinator ./dist --recurse --silent --skip \"^mailto:\"",
+        "lint:html": "html-validate \"dist/**/*.html\"",
+        "lint:a11y": "pa11y-ci --config .pa11yci.json",
+        "lint:lhci": "lhci autorun",
+        "lint:ga": "node scripts/ga-coverage.mjs",
+        "lint:all": "npm run lint:links && npm run lint:html && npm run lint:ga"
     },
     "dependencies": {
         "@astrojs/react": "^3.6.3",
@@ -29,9 +35,15 @@
     },
     "devDependencies": {
         "@astrojs/tailwind": "^5.1.0",
+        "@lhci/cli": "^0.14.0",
         "autoprefixer": "^10.4.18",
+        "html-validate": "^9.6.0",
+        "http-server": "^14.1.1",
+        "linkinator": "^6.1.2",
+        "pa11y-ci": "^3.1.0",
         "postcss": "^8.4.35",
         "tailwindcss": "^3.4.1",
-        "typescript": "^5.3.3"
+        "typescript": "^5.3.3",
+        "wait-on": "^8.0.1"
     }
 }

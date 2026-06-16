@@ -31,6 +31,8 @@ const companyData = data as CompanyData;
         <div class="pt-sm">
           <a
             href={`mailto:${companyData.contact.email}`}
+            data-ga-event="recruit_email_click"
+            data-ga-label="mailto_cta"
             class="inline-flex items-center gap-xs px-5 py-2.5 bg-text-primary text-white rounded-lg hover:bg-primary-700 transition-colors text-body font-medium"
           >
             メールで連絡する
