@@ -1,0 +1,239 @@
+---
+import LegalLayout from '@/components/legal/LegalLayout.astro';
+import { LEGAL_INFO } from '@/lib/legal-info';
+
+const toc = [
+  { id: 'collect', label: '取得する情報' },
+  { id: 'not-collect', label: '取得しない情報' },
+  { id: 'purpose', label: '利用目的' },
+  { id: 'third-party', label: '第三者提供' },
+  { id: 'rights', label: 'ユーザーの権利' },
+  { id: 'children', label: '子ども向け配慮' },
+  { id: 'consent-ui', label: '同意 UI フロー（初回起動）' },
+  { id: 'jurisdiction', label: '法的管轄' },
+  { id: 'contact', label: 'お問い合わせ' },
+];
+
+const thirdParties = [
+  {
+    provider: 'Google LLC（Firebase Analytics）',
+    purpose: '分析',
+    retention: '14 ヶ月（GA4 デフォルト）',
+    url: 'https://firebase.google.com/support/privacy',
+  },
+  {
+    provider: 'Google LLC（Firebase Crashlytics、Phase 2+）',
+    purpose: 'クラッシュレポート',
+    retention: '90 日',
+    url: 'https://firebase.google.com/support/privacy',
+  },
+  {
+    provider: 'Google LLC（Google AdMob）',
+    purpose: '広告配信',
+    retention: 'デフォルト',
+    url: 'https://policies.google.com/privacy',
+  },
+  {
+    provider: 'Google LLC（Google Play, IAP）',
+    purpose: '課金処理',
+    retention: 'Google 標準',
+    url: 'https://policies.google.com/privacy',
+  },
+  {
+    provider: 'Apple Inc.（App Store Connect, IAP）',
+    purpose: '課金処理',
+    retention: 'Apple 標準',
+    url: 'https://www.apple.com/legal/privacy/',
+  },
+];
+---
+
+<LegalLayout
+  pageTitle="プライバシーポリシー"
+  documentTitle="MOR プライバシーポリシー | 株式会社バリアントコード"
+  description="モールス学習アプリ MOR のプライバシーポリシー。取得する情報、利用目的、第三者提供、ユーザーの権利（GDPR / CCPA / APPI）について定めます。"
+  path="/mor/privacy"
+  updated={LEGAL_INFO.publishDate}
+  toc={toc}
+>
+  <section id="collect" class="space-y-md">
+    <h2>1. 取得する情報</h2>
+    <p>MOR は次の情報を取得することがあります。</p>
+
+    <div class="space-y-sm">
+      <h3>1.1 利用状況の分析データ（Firebase Analytics 経由）</h3>
+      <ul class="list-disc pl-5 space-y-xs">
+        <li>画面遷移、タップ操作のシンボル、確定文字、画面解像度、OS バージョン、アプリバージョン、概略地域</li>
+        <li>
+          Drill モード関連:
+          <ul class="list-[circle] pl-5 space-y-xs mt-xs">
+            <li>クエストクリア状況（quest_id、mode、wpm、attempt_count、seconds_in_session）</li>
+            <li>ペルソナ自己申告（cipher / ham / other、初回起動時の survey 結果）</li>
+            <li>Rive ツリー点灯率（25% / 50% / 75% / 100% milestone）</li>
+            <li>IAP 関連イベント（ペイウォール表示、購入完了、product_id）</li>
+          </ul>
+        </li>
+        <li>
+          広告関連:
+          <ul class="list-[circle] pl-5 space-y-xs mt-xs">
+            <li>広告インプレッション（ad_unit_id、placement、eCPM）</li>
+          </ul>
+        </li>
+        <li><strong>個人を特定する情報（氏名・住所・電話番号など）は取得しません</strong></li>
+      </ul>
+    </div>
+
+    <div class="space-y-sm">
+      <h3>1.2 クラッシュ情報（Firebase Crashlytics 経由 — モバイル版のみ、Phase 2+ で本格導入）</h3>
+      <ul class="list-disc pl-5 space-y-xs">
+        <li>スタックトレース、デバイス機種、OS バージョン</li>
+      </ul>
+    </div>
+
+    <div class="space-y-sm">
+      <h3>1.3 広告識別子（iOS: IDFA / Android: AAID）</h3>
+      <ul class="list-disc pl-5 space-y-xs">
+        <li>アプリ起動時に表示される [App Tracking Transparency] ダイアログでユーザーが許可した場合のみ</li>
+        <li>拒否時は非パーソナライズ広告（npa=1）で配信</li>
+      </ul>
+    </div>
+
+    <div class="space-y-sm">
+      <h3>1.4 購入記録</h3>
+      <ul class="list-disc pl-5 space-y-xs">
+        <li>App Store / Google Play が管理。MOR 自体は端末ローカルに「広告非表示の権利保有」フラグ（mor.drill.full）のみ保存</li>
+      </ul>
+    </div>
+
+    <div class="space-y-sm">
+      <h3>1.5 修了証情報（端末内のみ、送信なし）</h3>
+      <ul class="list-disc pl-5 space-y-xs">
+        <li>ユーザが入力した修了証ユーザ名と発行日（mor.drill.certificate）</li>
+        <li>完走 PNG 画像生成のためにのみ使用</li>
+        <li>アプリアンインストール時に消去</li>
+        <li><strong>送信先なし</strong>（端末ローカル完結）</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="not-collect" class="space-y-sm">
+    <h2>2. 取得しない情報</h2>
+    <ul class="list-disc pl-5 space-y-xs">
+      <li>氏名・住所・電話番号・メールアドレス</li>
+      <li>生体情報、位置情報、連絡先</li>
+      <li>学習進捗のクラウド同期は行いません（端末ローカルのみ、shared_preferences）</li>
+      <li>修了証ユーザ名は任意入力、入力スキップ可</li>
+    </ul>
+  </section>
+
+  <section id="purpose" class="space-y-sm">
+    <h2>3. 利用目的</h2>
+    <ul class="list-disc pl-5 space-y-xs">
+      <li>機能改善（どの文字でつまずきやすいか、クエスト難易度の偏り検出）</li>
+      <li>ペルソナ別仮説検証</li>
+      <li>速度別重ね掛け overlay の認知率測定（Phase 2+）</li>
+      <li>不具合修正（Crashlytics）</li>
+      <li>広告の配信と効果測定（Google AdMob）</li>
+      <li>課金処理（App Store / Google Play）</li>
+    </ul>
+  </section>
+
+  <section id="third-party" class="space-y-sm">
+    <h2>4. 第三者提供</h2>
+    <div class="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+      <table class="w-full border-collapse text-body">
+        <thead>
+          <tr class="border-b-2 border-border-light text-left">
+            <th class="py-2 pr-4 font-semibold text-text-primary align-bottom">送信先</th>
+            <th class="py-2 pr-4 font-semibold text-text-primary align-bottom">用途</th>
+            <th class="py-2 pr-4 font-semibold text-text-primary align-bottom whitespace-nowrap">保管期間</th>
+            <th class="py-2 font-semibold text-text-primary align-bottom">プライバシーポリシー</th>
+          </tr>
+        </thead>
+        <tbody>
+          {thirdParties.map(row => (
+            <tr class="border-b border-border-light align-top">
+              <td class="py-2 pr-4 text-text-primary">{row.provider}</td>
+              <td class="py-2 pr-4 text-text-primary whitespace-nowrap">{row.purpose}</td>
+              <td class="py-2 pr-4 text-text-primary">{row.retention}</td>
+              <td class="py-2 text-text-primary">
+                <a href={row.url} target="_blank" rel="noopener noreferrer" class="break-all">
+                  {row.url}
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="rights" class="space-y-md">
+    <h2>5. ユーザーの権利</h2>
+
+    <div class="space-y-sm">
+      <h3>5.1 同意の撤回</h3>
+      <ul class="list-disc pl-5 space-y-xs">
+        <li>広告識別子の同意撤回: 端末の「設定」→「プライバシー」から ATT / AAID を変更可能</li>
+        <li>分析データ送信の同意撤回: アプリ内設定画面の「分析データ送信」スイッチで OFF にできます</li>
+      </ul>
+    </div>
+
+    <div class="space-y-sm">
+      <h3>5.2 GDPR / CCPA / APPI に基づく権利</h3>
+      <ul class="list-disc pl-5 space-y-xs">
+        <li><strong>開示請求</strong>（APPI 第 28 条 / GDPR Art. 15）: user_pseudo_id をご提示いただき、Firebase BigQuery export から該当 ID のデータを 30 日以内に CSV で提供</li>
+        <li><strong>削除請求 / 忘れられる権利</strong>（APPI 第 30 条 / GDPR Art. 17）: user_pseudo_id をご提示いただき、Firebase Analytics の User Deletion API で削除実行（60 日以内完了）</li>
+        <li><strong>訂正請求</strong>: persona_self_id 等の修正はアプリ内で可能、Firebase 側削除と再送信で対応</li>
+        <li><strong>CCPA「Do Not Sell My Personal Information」</strong>: アプリ内設定画面から AdMob パーソナライズ広告を OFF にできます</li>
+      </ul>
+    </div>
+
+    <div class="space-y-sm">
+      <h3>5.3 アンインストール</h3>
+      <ul class="list-disc pl-5 space-y-xs">
+        <li>アンインストールにより端末ローカルのデータは消去されます</li>
+        <li>広告非表示 IAP は同一 Apple ID / Google アカウントで Restore Purchase により復元可能</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="children" class="space-y-sm">
+    <h2>6. 子ども向け配慮</h2>
+    <ul class="list-disc pl-5 space-y-xs">
+      <li>本アプリは <strong>13 歳以上</strong> を対象とします（COPPA / Google AdMob 標準）</li>
+      <li>初回起動時の同意モーダルで「13 歳以上であることの確認」を取得します</li>
+      <li>13 歳未満の利用は利用規約違反となります</li>
+    </ul>
+  </section>
+
+  <section id="consent-ui" class="space-y-sm">
+    <h2>7. 同意 UI フロー（初回起動）</h2>
+    <p>オンボーディング前に以下のモーダルを表示します。</p>
+    <ul class="list-disc pl-5 space-y-xs">
+      <li>利用規約への同意（必須）</li>
+      <li>プライバシーポリシーへの同意（必須）</li>
+      <li>13 歳以上であることの確認（必須）</li>
+      <li>分析データ送信の許可（任意、拒否でも全機能利用可）</li>
+      <li>パーソナライズ広告の許可（任意、拒否でも非パーソナライズ広告は表示）</li>
+    </ul>
+  </section>
+
+  <section id="jurisdiction" class="space-y-sm">
+    <h2>8. 法的管轄</h2>
+    <ul class="list-disc pl-5 space-y-xs">
+      <li>準拠法: 日本法</li>
+      <li>紛争解決: 東京地方裁判所</li>
+    </ul>
+  </section>
+
+  <section id="contact" class="space-y-sm">
+    <h2>9. お問い合わせ</h2>
+    <address class="not-italic space-y-1">
+      <p>{LEGAL_INFO.companyName}</p>
+      <p>{LEGAL_INFO.registeredAddress}</p>
+      <p>個人情報保護管理者: {LEGAL_INFO.representative}</p>
+      <p>メール: <a href={`mailto:${LEGAL_INFO.contactEmail}`}>{LEGAL_INFO.contactEmail}</a></p>
+    </address>
+  </section>
+</LegalLayout>
