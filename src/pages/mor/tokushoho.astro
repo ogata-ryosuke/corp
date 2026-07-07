@@ -1,0 +1,131 @@
+---
+import LegalLayout from '@/components/legal/LegalLayout.astro';
+import { LEGAL_INFO } from '@/lib/legal-info';
+
+const iosRequirement = LEGAL_INFO.iosMinVersion
+  ? `iOS ${LEGAL_INFO.iosMinVersion} 以降`
+  : 'iOS: 対応バージョンは確定次第掲載します';
+const androidRequirement = LEGAL_INFO.androidMinApi
+  ? `Android ${LEGAL_INFO.androidMinApi} 以降`
+  : 'Android: 対応バージョン（API レベル）は確定次第掲載します';
+
+const dtClass = 'text-body font-semibold text-text-primary';
+const rowClass = 'grid sm:grid-cols-[200px_1fr] gap-x-lg gap-y-xs py-md border-b border-border-light';
+---
+
+<LegalLayout
+  pageTitle="特定商取引法に基づく表記"
+  documentTitle="MOR 特定商取引法に基づく表記 | 株式会社バリアントコード"
+  description="モールス学習アプリ MOR の特定商取引法に基づく表記。販売事業者、運営統括責任者、販売価格、支払い方法、返品・交換について記載します。"
+  path="/mor/tokushoho"
+>
+  <dl class="border-t border-border-light">
+    <div class={rowClass}>
+      <dt class={dtClass}>販売事業者</dt>
+      <dd><p>{LEGAL_INFO.companyName}</p></dd>
+    </div>
+
+    <div class={rowClass}>
+      <dt class={dtClass}>運営統括責任者</dt>
+      <dd><p>{LEGAL_INFO.representative}</p></dd>
+    </div>
+
+    <div class={rowClass}>
+      <dt class={dtClass}>所在地</dt>
+      <dd><p>{LEGAL_INFO.registeredAddress}</p></dd>
+    </div>
+
+    <div class={rowClass}>
+      <dt class={dtClass}>連絡先</dt>
+      <dd class="space-y-xs">
+        <p>電話番号: {LEGAL_INFO.phoneDisclosureNote}</p>
+        <p>メール: <a href={`mailto:${LEGAL_INFO.contactEmail}`}>{LEGAL_INFO.contactEmail}</a></p>
+      </dd>
+    </div>
+
+    <div class={rowClass}>
+      <dt class={dtClass}>販売価格</dt>
+      <dd class="space-y-sm">
+        <div class="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+          <table class="w-full border-collapse text-body">
+            <thead>
+              <tr class="border-b-2 border-border-light text-left">
+                <th class="py-2 pr-4 font-semibold text-text-primary">商品 ID</th>
+                <th class="py-2 pr-4 font-semibold text-text-primary">商品名</th>
+                <th class="py-2 pr-4 font-semibold text-text-primary whitespace-nowrap">価格（税込）</th>
+                <th class="py-2 font-semibold text-text-primary">形態</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="align-top">
+                <td class="py-2 pr-4 text-text-primary font-mono">mor.drill.full</td>
+                <td class="py-2 pr-4 text-text-primary">モールス検定 広告非表示</td>
+                <td class="py-2 pr-4 text-text-primary font-semibold whitespace-nowrap">{LEGAL_INFO.productPrice}</td>
+                <td class="py-2 text-text-primary">買い切り（Non-Consumable）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-text-secondary">価格は App Store / Google Play の表示に従います。</p>
+      </dd>
+    </div>
+
+    <div class={rowClass}>
+      <dt class={dtClass}>商品代金以外に必要な料金</dt>
+      <dd><p>通信料（お客様負担）</p></dd>
+    </div>
+
+    <div class={rowClass}>
+      <dt class={dtClass}>支払い方法</dt>
+      <dd>
+        <ul class="list-disc pl-5 space-y-xs">
+          <li><strong>iOS</strong>: Apple ID に紐づく支払い方法</li>
+          <li><strong>Android</strong>: Google Play に紐づく支払い方法</li>
+        </ul>
+      </dd>
+    </div>
+
+    <div class={rowClass}>
+      <dt class={dtClass}>支払い時期</dt>
+      <dd><p>買い切り: 購入時に一括（自動更新・継続課金は<strong>ありません</strong>）</p></dd>
+    </div>
+
+    <div class={rowClass}>
+      <dt class={dtClass}>商品の引き渡し時期</dt>
+      <dd><p>決済完了後ただちにアプリ内で広告非表示が有効になります。</p></dd>
+    </div>
+
+    <div class={rowClass}>
+      <dt class={dtClass}>返品・交換について</dt>
+      <dd>
+        <ul class="list-disc pl-5 space-y-xs">
+          <li>デジタルコンテンツの性質上、購入後の返品・返金には応じかねます</li>
+          <li>
+            返金を希望される場合は Apple / Google の標準フローでお手続きください:
+            <ul class="list-[circle] pl-5 space-y-xs mt-xs">
+              <li><strong>iOS</strong>: 設定 → Apple ID → 購入履歴 →「問題を報告」</li>
+              <li><strong>Android</strong>: Google Play ストア → メニュー →「ヘルプとフィードバック」</li>
+            </ul>
+          </li>
+          <li>返金可否判断は Apple / Google が行います</li>
+        </ul>
+      </dd>
+    </div>
+
+    <div class={rowClass}>
+      <dt class={dtClass}>Restore Purchase（購入の復元）</dt>
+      <dd><p>同一 Apple ID / Google アカウントの別端末で再ダウンロードした場合、設定画面の「購入を復元」ボタンから過去の購入を復元できます。</p></dd>
+    </div>
+
+    <div class={rowClass}>
+      <dt class={dtClass}>動作環境</dt>
+      <dd>
+        <ul class="list-disc pl-5 space-y-xs">
+          <li>{iosRequirement}</li>
+          <li>{androidRequirement}</li>
+          <li>Web（Firefox / Chrome / Safari 最新版）— 課金機能は提供されません</li>
+        </ul>
+      </dd>
+    </div>
+  </dl>
+</LegalLayout>

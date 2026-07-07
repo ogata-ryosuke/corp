@@ -1,0 +1,181 @@
+---
+import LegalLayout from '@/components/legal/LegalLayout.astro';
+import { LEGAL_INFO } from '@/lib/legal-info';
+
+const toc = [
+  { id: 'apply', label: '適用' },
+  { id: 'license', label: '利用許諾' },
+  { id: 'service', label: 'サービス内容' },
+  { id: 'prohibited', label: '禁止事項' },
+  { id: 'billing', label: '課金（広告非表示 IAP）' },
+  { id: 'responsibility', label: 'ユーザの責任' },
+  { id: 'disclaimer', label: '免責（学習成果の保証なし）' },
+  { id: 'service-change', label: 'サービス変更・終了' },
+  { id: 'terms-change', label: '規約の変更' },
+  { id: 'copyright', label: '著作権・知的財産' },
+  { id: 'oss', label: 'OSS ライセンス' },
+  { id: 'governing-law', label: '準拠法・管轄' },
+  { id: 'contact', label: 'お問い合わせ' },
+];
+---
+
+<LegalLayout
+  pageTitle="利用規約"
+  documentTitle="MOR 利用規約 | 株式会社バリアントコード"
+  description="モールス学習アプリ MOR の利用規約。利用許諾、禁止事項、課金、免責、準拠法・管轄について定めます。"
+  path="/mor/terms"
+  updated={LEGAL_INFO.publishDate}
+  toc={toc}
+>
+  <section id="apply" class="space-y-sm">
+    <h2>1. 適用</h2>
+    <p>本規約は MOR（以下「本アプリ」）の利用条件を定めるものです。ユーザーは本アプリをインストールまたは利用した時点で本規約に同意したものとみなされます。</p>
+  </section>
+
+  <section id="license" class="space-y-sm">
+    <h2>2. 利用許諾</h2>
+    <p>{LEGAL_INFO.companyName}（以下「当社」）は、本アプリの非独占的・譲渡不可・非サブライセンス可能な使用権をユーザーに許諾します。</p>
+  </section>
+
+  <section id="service" class="space-y-sm">
+    <h2>3. サービス内容</h2>
+    <ul class="list-disc pl-5 space-y-xs">
+      <li>モールス符号学習支援アプリ</li>
+      <li>Drill モード（全 15 クエスト + 章末チャレンジ、Phase 1）</li>
+      <li>自由打鍵モード（morse_pad）</li>
+      <li>完走時の修了証画像（PNG）生成・SNS シェア</li>
+      <li>すべての学習クエストは無料で利用できます</li>
+      <li>広告非表示 IAP（買い切り）による広告の除去</li>
+    </ul>
+  </section>
+
+  <section id="prohibited" class="space-y-sm">
+    <h2>4. 禁止事項</h2>
+    <p>ユーザーは次の行為を行ってはなりません。</p>
+    <ul class="list-disc pl-5 space-y-xs">
+      <li>法令または公序良俗に反する行為</li>
+      <li>本アプリのリバースエンジニアリング、逆コンパイル、逆アセンブル</li>
+      <li>jailbreak / root 経由など不正な手段での IAP 解除試行</li>
+      <li>本アプリの改変、二次利用、再配布</li>
+      <li>当社または第三者の知的財産権を侵害する行為</li>
+      <li>本アプリの不正利用、サーバーへの不正アクセス</li>
+      <li>自動化スクリプト・bot による利用</li>
+    </ul>
+  </section>
+
+  <section id="billing" class="space-y-md">
+    <h2>5. 課金（広告非表示 IAP）</h2>
+
+    <div class="space-y-sm">
+      <h3>5.1 商品形態</h3>
+      <ul class="list-disc pl-5 space-y-xs">
+        <li><strong>広告非表示 {LEGAL_INFO.productPrice} — 買い切り（Non-Consumable）</strong></li>
+        <li>本 IAP は<strong>広告の除去のみ</strong>を行うものです。すべての学習クエストは購入の有無にかかわらず無料でご利用いただけます</li>
+        <li>自動更新 / サブスクリプション / 定期購入は<strong>一切ありません</strong></li>
+        <li>1 回のお支払いで永続的に広告非表示でご利用いただけます</li>
+      </ul>
+    </div>
+
+    <div class="space-y-sm">
+      <h3>5.2 購入手続き</h3>
+      <ul class="list-disc pl-5 space-y-xs">
+        <li>本アプリ内での購入は App Store / Google Play 経由で処理されます</li>
+        <li>価格は購入画面に表示されます</li>
+        <li>特定商取引法に基づく表記（<a href="/mor/tokushoho">/mor/tokushoho</a>）を必ず確認してください</li>
+      </ul>
+    </div>
+
+    <div class="space-y-sm">
+      <h3>5.3 Restore Purchase（購入の復元）</h3>
+      <ul class="list-disc pl-5 space-y-xs">
+        <li>同一 Apple ID / Google アカウントで別端末にインストールした場合、設定画面の「<strong>購入を復元</strong>」ボタンから過去の購入を復元できます</li>
+        <li>復元失敗（購入履歴なし、ネットワーク障害、アカウント不一致）時はエラー Snackbar で通知します</li>
+      </ul>
+    </div>
+
+    <div class="space-y-sm">
+      <h3>5.4 返金</h3>
+      <ul class="list-disc pl-5 space-y-xs">
+        <li>アプリ運営者は<strong>直接返金しません</strong></li>
+        <li>
+          返金を希望される場合は Apple / Google の標準フローでお手続きください:
+          <ul class="list-[circle] pl-5 space-y-xs mt-xs">
+            <li><strong>iOS</strong>: 設定 → Apple ID → 購入履歴 →「問題を報告」</li>
+            <li><strong>Android</strong>: Google Play ストア → メニュー →「ヘルプとフィードバック」</li>
+          </ul>
+        </li>
+        <li>返金可否判断は Apple / Google が行います</li>
+      </ul>
+    </div>
+
+    <div class="space-y-sm">
+      <h3>5.5 価格改定</h3>
+      <ul class="list-disc pl-5 space-y-xs">
+        <li>価格改定はアプリ内告知 + リリースノートで明示します</li>
+        <li>既存購入者には影響しません（買い切りのため）</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="responsibility" class="space-y-sm">
+    <h2>6. ユーザの責任</h2>
+    <ul class="list-disc pl-5 space-y-xs">
+      <li>Apple ID / Google アカウントの管理はユーザの責任です</li>
+      <li>不正な手段での IAP 解除試行は利用規約違反となります</li>
+      <li>13 歳以上であることが利用条件です（プライバシーポリシー <a href="/mor/privacy#children">§6</a> 参照）</li>
+    </ul>
+  </section>
+
+  <section id="disclaimer" class="space-y-sm">
+    <h2>7. 免責（学習成果の保証なし）</h2>
+    <ul class="list-disc pl-5 space-y-xs">
+      <li>本アプリは現状有姿で提供されます。当社は本アプリの正確性・完全性・継続性について保証しません</li>
+      <li>本アプリの利用または利用不能から生じた損害について、当社は故意または重過失がない限り責任を負いません</li>
+      <li><strong>本アプリは学習体験を提供しますが、学習成果（モールス符号の習得、業務利用可能な実力）を保証しません</strong></li>
+      <li>業務利用（CW QSO 実戦投入など）は推奨せず、アプリ運営者は学習成果に責任を負いません</li>
+    </ul>
+  </section>
+
+  <section id="service-change" class="space-y-sm">
+    <h2>8. サービス変更・終了</h2>
+    <p>当社は予告なく本アプリの内容を変更、または提供を終了できるものとします。</p>
+  </section>
+
+  <section id="terms-change" class="space-y-sm">
+    <h2>9. 規約の変更</h2>
+    <ul class="list-disc pl-5 space-y-xs">
+      <li>本規約は予告なく変更されることがあります</li>
+      <li>重大変更時は 30 日前のアプリ内告知 + 新規同意取得を行います</li>
+      <li>変更後の規約は本アプリ内または <a href="/mor/terms">https://variantcode.co.jp/mor/terms</a> に掲載した時点で効力を生じます</li>
+    </ul>
+  </section>
+
+  <section id="copyright" class="space-y-sm">
+    <h2>10. 著作権・知的財産</h2>
+    <ul class="list-disc pl-5 space-y-xs">
+      <li>本アプリ内の画像（Rive ツリー、UI 画像、完走 PNG）、コード、テキストの著作権は当社に帰属します</li>
+      <li>完走 PNG 画像の<strong>個人 SNS 共有（X / LINE 等）の非商用利用</strong>は許諾します</li>
+      <li>商用利用（販売、広告）は別途許諾が必要です</li>
+      <li>アプリ UI スクリーンショットの紹介・レビュー目的の引用は黙認します（フェアユース範囲）</li>
+    </ul>
+  </section>
+
+  <section id="oss" class="space-y-sm">
+    <h2>11. OSS ライセンス</h2>
+    <p>本アプリで使用する OSS ライブラリのライセンスは設定画面の「OSS ライセンス」から確認できます。</p>
+  </section>
+
+  <section id="governing-law" class="space-y-sm">
+    <h2>12. 準拠法・管轄</h2>
+    <p>本規約は日本法に準拠します。本アプリに関する紛争は東京地方裁判所を第一審の専属的合意管轄裁判所とします。</p>
+  </section>
+
+  <section id="contact" class="space-y-sm">
+    <h2>13. お問い合わせ</h2>
+    <address class="not-italic space-y-1">
+      <p>{LEGAL_INFO.companyName}</p>
+      <p>{LEGAL_INFO.registeredAddress}</p>
+      <p>メール: <a href={`mailto:${LEGAL_INFO.contactEmail}`}>{LEGAL_INFO.contactEmail}</a></p>
+    </address>
+  </section>
+</LegalLayout>
