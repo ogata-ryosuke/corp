@@ -1,0 +1,163 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import companyData from '@/lib/company-data.json';
+import { LEGAL_LINKS } from '@/lib/legal-info';
+
+interface TocItem {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  /** ページ本体の見出し（h1） */
+  pageTitle: string;
+  /** <title> / og:title 用のフルタイトル */
+  documentTitle: string;
+  /** meta description */
+  description: string;
+  /** 当該ページの公開パス（例: /mor/privacy） */
+  path: string;
+  /** 最終更新日（任意。特商法ページなど無い場合は省略） */
+  updated?: string;
+  /** 目次（任意）。指定時のみ目次ブロックを表示 */
+  toc?: TocItem[];
+}
+
+const { pageTitle, documentTitle, description, path, updated, toc } = Astro.props;
+
+const siteBase = Astro.site?.toString().replace(/\/$/, '') ?? 'https://variantcode.co.jp';
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: `${siteBase}/` },
+    { '@type': 'ListItem', position: 2, name: pageTitle, item: `${siteBase}${path}` },
+  ],
+};
+
+const relatedLinks = LEGAL_LINKS.filter(link => link.path !== path);
+---
+
+<Layout title={documentTitle} description={description}>
+  {/* BreadcrumbList JSON-LD（構造化データは body 内でも有効） */}
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+
+  <Header companyName={companyData.companyName} />
+
+  <main id="main-content" tabindex="-1" class="pt-header">
+    <article class="max-w-3xl mx-auto px-4 sm:px-6 md:px-10 py-xl md:py-2xl space-y-xl">
+      <nav aria-label="パンくずリスト" class="text-small text-text-secondary">
+        <a href="/" class="hover:text-text-primary hover:underline">トップ</a>
+        <span class="mx-1" aria-hidden="true">/</span>
+        <span class="text-text-primary">{pageTitle}</span>
+      </nav>
+
+      <header class="space-y-sm border-b border-border-light pb-lg">
+        <p class="text-small uppercase tracking-[0.2em] text-primary-700 font-semibold">MOR / Legal</p>
+        <h1 class="text-3xl sm:text-4xl font-bold text-text-primary leading-tight">{pageTitle}</h1>
+        {updated && (
+          <p class="text-small text-text-secondary">
+            最終更新日: <time datetime={updated}>{updated}</time>
+          </p>
+        )}
+      </header>
+
+      {toc && toc.length > 0 && (
+        <nav aria-label="目次" class="bg-bg-section border border-border-light rounded-card p-lg">
+          <h2 class="text-subheading text-text-primary font-semibold mb-sm">目次</h2>
+          <ol class="space-y-xs">
+            {toc.map((item, index) => (
+              <li class="flex gap-sm items-baseline">
+                <span class="text-small text-text-tertiary font-mono tabular-nums flex-shrink-0 w-6 text-right">{index + 1}.</span>
+                <a href={`#${item.id}`} class="text-body text-primary-700 hover:text-primary-900 hover:underline leading-relaxed">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
+
+      <div class="legal-body space-y-xl">
+        <slot />
+      </div>
+
+      <nav aria-label="MOR 関連ページ" class="space-y-sm border-t border-border-light pt-lg">
+        <h2 class="text-sectionHeading text-text-primary font-bold">MOR 関連ページ</h2>
+        <ul class="grid grid-cols-1 sm:grid-cols-3 gap-sm">
+          {relatedLinks.map(link => (
+            <li>
+              <a
+                href={link.path}
+                class="block h-full bg-bg-surface border border-border-light rounded-card p-md hover:border-primary-500 transition-colors text-body text-text-primary font-medium"
+              >
+                {link.label}
+                <span aria-hidden="true" class="text-primary-700"> →</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="text-small text-text-tertiary pt-xs">
+          <a href="/" class="text-primary-700 hover:text-primary-900 hover:underline">株式会社バリアントコード コーポレートサイトへ戻る</a>
+        </p>
+      </nav>
+    </article>
+  </main>
+
+  {/* フッター（main の既存テンプレートに合わせてインライン。SiteFooter コンポーネント非依存） */}
+  <footer class="bg-text-primary text-white mt-xl">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-20 py-lg">
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-md">
+        <div>
+          <p class="text-body font-semibold">{companyData.companyName}</p>
+          <p class="text-small text-text-tertiary">Web開発・アプリ開発・基幹システム設計運用</p>
+        </div>
+        <p class="text-small text-text-tertiary">We are {companyData.companyNameEn}</p>
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<style is:global>
+  /* MOR 法務ページ本文の可読性スタイル（Tailwind preflight 前提のため明示指定） */
+
+  /* 目次アンカーのジャンプ先（固定ヘッダー56px分のオフセット。main の globals に
+     scroll-padding-top が無いため各セクションで担保する） */
+  .legal-body section[id] {
+    scroll-margin-top: 72px;
+  }
+
+  .legal-body h2 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: #09090b;
+    scroll-margin-top: 72px;
+  }
+
+  .legal-body h3 {
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 600;
+    color: #09090b;
+  }
+
+  .legal-body p,
+  .legal-body li {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #09090b;
+  }
+
+  .legal-body a {
+    color: #0369a1;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .legal-body a:hover {
+    color: #082f49;
+  }
+</style>
